@@ -57,13 +57,19 @@ NOTE:  If you are using our provided machine for AE, we have installed the kerne
 $ cd omnicache-fast24-artifacts
 $ source scripts/setvars.sh
 $ ./scripts/compile_kernel.sh
+$ Open /boot/grub.cfs in sudo mode
+$ Select the kernel 4.15.18 as the default kernel in the boot and replace the following line
+linux   /boot/vmlinuz-4.15.18 root=UUID=cbcd0ffe-978a-11e9-9a6b-0cc47afdfd54 ro scsi_mod.use_blk_mq=1 maybe-ubiquity
+with
+linux   /boot/vmlinuz-4.15.18 root=UUID=cbcd0ffe-978a-11e9-9a6b-0cc47afdfd54 ro scsi_mod.use_blk_mq=1 maybe-ubiquity memmap=80G$80G
+$ Save the changes to grub
 $ sudo reboot
-
+$ After reboot, check the kernel version. It should be 4.15.18
 ```
 
 ### 4. Set environmental variables and compile and install libraries
 
-Please use `screen` to manage the terminal session for maintaining the connection.
+Please use `screen` to manage the terminal session and maintain the connection.
 
 ```
 $ screen
