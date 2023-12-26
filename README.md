@@ -26,11 +26,11 @@ This repository contains the artifact for reproducing our FAST '24 paper "OmniCa
 
 Our artifact is based on **Linux kernel 4.15.18** and it should run on any Linux distribution. The current scripts are developed for **Ubuntu 18.04.5 LTS**. Porting to other Linux distributions would require some script modifications.
 
-Our artifact requires a machine **equipped with Intel Optane persistent memory**.
+Our artifact requires a machine **equipped with Intel Optane persistent memory**. To enable outside access to Optane servers, we are using a different machine with a slightly lower memory capacity.  
 
 # Setup 
 
-**NOTE: If you are using our provided machine for AE, we have cloned the code and installed the kernel for you. The repo path is `/localhome/aereview`, you can directly goto Step 4.**
+**NOTE: If you are using our provided machine for AE, we have cloned the code and installed the kernel for you. The repo path is `/localhome/aereview`, you can directly go to Step 4.**
 
 ### 1. Get OmniCache source code on Github
 
@@ -47,7 +47,7 @@ $ ./deps.sh # If you are using our provided machine for AE, then you don't need 
 ```
 NOTE: If you are prompted during Ubuntu package installation, please hit enter and all the package installation to complete.
 
-### 3. Compile kenrel 
+### 3. Compile the kernel first
 
 First, we need to install our modified kernel and then reboot.
 
@@ -74,6 +74,8 @@ $ source scripts/setvars.sh
 $ make && make install
 ```
 
+**Please note, if you get logged out of the SSH session or reboot the system (as mentioned below), you must repeat step 4 and set the environmental variable again before running.** 
+
 ### 5. Mount NearStorageFS
 
 ```
@@ -91,7 +93,7 @@ pmem1       259:3    0 248.1G  0 disk /mnt/ram
 
 ### Run micro-bench 
 
-Assume current directory is the project root directory.
+Assume the current directory is the project root directory.
 
 ```
 $ cd omnicache-fast24-artifacts
@@ -107,7 +109,7 @@ $ cd $BASE/libfs/benchmark/
 $ ./scripts/run_omnicache_quick.sh
 ```
 
-Expect output will be similar to ```Benchmark takes 0.97 s, average thruput 4.45 GB/s```. If you can see the above output, then you are good for all necessary environmental settings. You can start running all other experiments for artifact evaluation.
+Expect output will be similar to ```Benchmark takes 0.97 s, average thruput 4.45 GB/s```. If you can see the above output, you are good for all necessary environmental settings. You can start running all other experiments for artifact evaluation.
 
 #### 1. Run (**Figure 4**):
 
@@ -158,7 +160,7 @@ $ cat RESULT.csv
 
 ### Run LevelDB
 
-Assume current directory is the project root directory.
+Assume the current directory is the project root directory.
 
 #### 1. Compile SHIM Library
 
@@ -212,7 +214,7 @@ $ python3 results-extract.py
 
 #### 1. Compile NOVA kenrel 
 
-First, we need to compile and install kernel of NOVA and then reboot.
+First, we need to compile and install the kernel of NOVA and then reboot.
 
 NOTE:  If you are using our provided machine for AE, we have installed the NOVA kernel (version 5.1.0) for you. You don't need to reinstall the kernel. 
 
@@ -221,7 +223,7 @@ $ cd omnicache-fast24-artifacts
 $ source scripts/setvars.sh
 $ ./scripts/compile_kernel_nova.sh
 $ sudo reboot
-# Then select kernel 5.1.0 in grub during rebooting
+# Then select kernel 5.1.0 in grub during rebooting. Please be careful about what you select as incorrect options can lead to system unable to mount.
 
 ```
 
@@ -234,7 +236,7 @@ $ cd $BASE/libfs
 $ ./scripts/mountnova.sh
 ```
 
-#### 3. Run NOVA with microbench (**Figure 4**):
+#### 3. Run NOVA with micro-benchmark (**Figure 4**):
 
 ```
 $ cd $BASE/libfs/benchmark/ae_scripts/figure4
@@ -243,6 +245,6 @@ $ ./figure4_nova.sh
 
 # Known issues 
 
-1. The system may requires occasional restart because of some Optane compatibility issues
+1. The system may require occasional restart because of some Optane compatibility issues
 
 2. LevelDB may occasionally hang after dbbench finishes. Simply pressing Ctrl-c to kill the process can solve the issue.
