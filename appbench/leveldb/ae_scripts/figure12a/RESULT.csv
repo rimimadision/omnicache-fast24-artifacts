@@ -1,0 +1,30 @@
+-----------------------
+Table for RunA
+-----------------------
+Threads,FusionFS,HostCache-user-level,OmniCache
+RunA,133.79,133.286,133.626
+-----------------------
+Table for RunB
+-----------------------
+Threads,FusionFS,HostCache-user-level,OmniCache
+RunB,181.598,184.654,180.885
+-----------------------
+Table for RunC
+-----------------------
+Threads,FusionFS,HostCache-user-level,OmniCache
+RunC,181.842,174.736,175.527
+-----------------------
+Table for RunD
+-----------------------
+Threads,FusionFS,HostCache-user-level,OmniCache
+RunD,257.424,253.297,260.264
+-----------------------
+Table for LoadE
+-----------------------
+Threads,FusionFS,HostCache-user-level,OmniCache
+LoadE,104.57,101.579,102.757
+-----------------------
+Table for RunF
+-----------------------
+Threads,FusionFS,HostCache-user-level,OmniCache
+RunF,150.41,148.214,148.526

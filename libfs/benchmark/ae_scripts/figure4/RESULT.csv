@@ -1,0 +1,12 @@
+-----------------------
+Table for randread
+-----------------------
+Threads,FusionFS,HostCache-user-level,lambda-IO-emulate,OmniCache
+16,2.61,1.54,2.65,3.98
+32,2.79,1.71,2.75,4.29
+-----------------------
+Table for randwrite
+-----------------------
+Threads,FusionFS,HostCache-user-level,lambda-IO-emulate,OmniCache
+16,0.89,1.3,2.63,3.93
+32,0.97,1.55,2.7,4.19

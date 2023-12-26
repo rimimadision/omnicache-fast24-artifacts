@@ -1,0 +1,16 @@
+-----------------------
+Table for randread
+-----------------------
+CacheSize,FusionFS,HostCache-user-level,OmniCache
+25%,1.94,0.55,3.31
+50%,1.94,1.31,4.01
+75%,1.94,2.62,4.01
+100%,1.94,2.64,4.04
+-----------------------
+Table for randwrite
+-----------------------
+CacheSize,FusionFS,HostCache-user-level,OmniCache
+25%,0.89,0.45,3.22
+50%,0.89,1.08,3.98
+75%,0.89,2.62,3.96
+100%,0.89,2.7,3.96

@@ -1,0 +1,35 @@
+LevelDB:    version 1.18
+Date:       Fri May  7 06:51:00 2021
+CPU:        64 * Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
+CPUCache:   22528 KB
+Thread 0: Parsing trace ...
+Thread 0: Done parsing, 500000 operations.
+Thread 0: Replaying trace ...
+
+Completed 0 ops... finished 100 ops                              ... finished 200 ops                              ... finished 300 ops                              ... finished 400 ops                              ... finished 500 ops                              ... finished 600 ops                              ... finished 700 ops                              ... finished 800 ops                              ... finished 900 ops                              ... finished 1000 ops                              ... finished 1500 ops                              ... finished 2000 ops                              ... finished 2500 ops                              ... finished 3000 ops                              ... finished 3500 ops                              ... finished 4000 ops                              ... finished 4500 ops                              ... finished 5000 ops                              ... finished 6000 ops                              ... finished 7000 ops                              ... finished 8000 ops                              ... finished 9000 ops                              ... finished 10000 ops                              ... finished 15000 ops                              ... finished 20000 ops                              ... finished 25000 ops                              ... finished 30000 ops                              ... finished 35000 ops                              ... finished 40000 ops                              ... finished 45000 ops                              ... finished 50000 ops                              ... finished 60000 ops                              ... finished 70000 ops                              ... finished 80000 ops                              ... finished 90000 ops                              ... finished 100000 ops                              ... finished 150000 ops                              ... finished 200000 ops                              ... finished 250000 ops                              ... finished 300000 ops                              ... finished 350000 ops                              ... finished 400000 ops                              ... finished 450000 ops                              ... finished 500000 ops                              
+
+Thread 0: Done replaying 500000 operations.
+YCSB splitup: R = 500000, D = 0, I = 0, U = 0, S = 0
+LevelDB/WiscKey splitup: P = 0, G = 500000, D = 0, ItSeek = 0, ItNext = 0
+Thread 0: Time taken = 1.694 seconds
+Thread 0: Total data: YCSB = 0.494429 GB, HyperLevelDB = 0.494429 GB
+Thread 0: Ops/s = 288.236 Kops/s
+Thread 0: YCSB throughput = 298.870219 MB/s
+Thread 0: HyperLevelDB throughput = 298.870219 MB/s
+Keys:       16 bytes each
+Values:     100 bytes each (50 bytes after compression)
+Entries:    1000000
+RawSize:    110.6 MB (estimated)
+FileSize:   62.9 MB (estimated)
+WARNING: Snappy compression is not enabled
+------------------------------------------------
+
+                               Compactions
+Level  Files Size(MB) Time(sec) Read(MB) Write(MB)
+--------------------------------------------------
+  0        0        0         0        0         2
+  1        0        0         0        4         4
+  2       22       35         0      102       100
+  3      259      509         1      525       469
+
+ycsb         :       3.699 micros/op;

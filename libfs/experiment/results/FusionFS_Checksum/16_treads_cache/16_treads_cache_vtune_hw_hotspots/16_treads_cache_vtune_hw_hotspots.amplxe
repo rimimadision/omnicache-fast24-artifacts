@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+ <rdmgr>
+  <timestamp type="u64_t">1664766266</timestamp>
+  <hostname type="string">node-0.jian123-134536.shc-pg0.wisc.cloudlab.us</hostname>
+  <os type="string">linux</os>
+  <product type="string">Intel® VTune™ Amplifier 2019 Update 4</product>
+  <buildNumber type="s32_t">597835</buildNumber>
+  <logicalCPUCount type="s32_t">40</logicalCPUCount>
+  <physicalCoreCount type="s32_t">20</physicalCoreCount>
+  <processorPackageCount type="s32_t">2</processorPackageCount>
+  <CPUFrequency type="s64_t">2200000000</CPUFrequency>
+  <CPUFamily type="s32_t">6</CPUFamily>
+  <CPUModel type="s32_t">85</CPUModel>
+  <CPUStepping type="s32_t">4</CPUStepping>
+  <CPUBrandName type="string">Intel(R) Xeon(R) Silver 4114 CPU @ 2.20GHz</CPUBrandName>
+  <isa type="string">avx512</isa>
+  <collectionTimeBegin type="u64_t">1664766266</collectionTimeBegin>
+  <collectionTimeEnd type="u64_t">1664766301</collectionTimeEnd>
+  <variables>
+   <at type="string">hs</at>
+  </variables>
+ </rdmgr>
+</root>

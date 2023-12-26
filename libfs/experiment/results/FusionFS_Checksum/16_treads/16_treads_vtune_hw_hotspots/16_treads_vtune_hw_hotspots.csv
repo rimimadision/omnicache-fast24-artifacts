@@ -1,0 +1,160 @@
+Function	CPU Time	CPU Time:Effective Time	CPU Time:Effective Time:Idle	CPU Time:Effective Time:Poor	CPU Time:Effective Time:Ok	CPU Time:Effective Time:Ideal	CPU Time:Effective Time:Over	CPU Time:Spin Time	CPU Time:Overhead Time	Instructions Retired	Microarchitecture Usage(%)	Microarchitecture Usage:Microarchitecture Usage(%)	Microarchitecture Usage:CPI Rate	Module	Function (Full)	Source File	Start Address
+vfio_crfs_queue_write	344.356419	344.356419	0.0	5.237265	143.400818	195.718336	0.0	0.0	0.0	232980000000	27.1	27.1	3.692682	libcrfslib.so	vfio_crfs_queue_write	[Unknown]	0x6d78
+do_checksum_write	78.183090	78.183090	0.0	2.721373	32.506123	42.955594	0.0	0.0	0.0	296318000000	82.4	82.4	0.654280	test_no_cache_offload_cache	do_checksum_write	[Unknown]	0x400ecd
+crfss_sched_round_robin	66.430568	66.430568	0.005012	61.303562	2.455751	2.666244	0.0	0.0	0.0	21230000000	2.3	2.3	8.832124	vmlinux	crfss_sched_round_robin	[Unknown]	0xffffffff81364bd0
+crfss_io_scheduler	40.559984	40.559984	0.0	37.141980	1.658885	1.759120	0.0	0.0	0.0	16742000000	5.3	5.3	6.852168	vmlinux	crfss_io_scheduler	[Unknown]	0xffffffff81364cd0
+find_avail_vsq_entry	21.385080	21.385080	0.0	21.174587	0.080188	0.130305	0.0	0.0	0.0	28523000000	20.7	20.7	2.077516	libcrfslib.so	find_avail_vsq_entry	[Unknown]	0x70a3
+crc32_le	10.900527	10.900527	0.0	0.516209	4.530610	5.853708	0.0	0.0	0.0	42889000000	69.7	69.7	0.614004	vmlinux	crc32_le	[Unknown]	0xffffffff8154f540
+__copy_user_nocache	4.410328	4.410328	0.0	2.871725	0.621455	0.917148	0.0	0.0	0.0	9196000000	26.6	26.6	1.327751	vmlinux	__copy_user_nocache	[Unknown]	0xffffffff8153fa10
+rd_queue_readtail	3.874072	3.874072	0.0	3.242594	0.250587	0.380892	0.0	0.0	0.0	1100000000	6.7	6.7	9.970000	vmlinux	rd_queue_readtail	[Unknown]	0xffffffff813519b0
+copy_user_enhanced_fast_string	2.706338	2.706338	0.0	0.145340	1.002347	1.558650	0.0	0.0	0.0	121000000	8.8	8.8	57.090909	vmlinux	copy_user_enhanced_fast_string	[Unknown]	0xffffffff8153fa00
+vfio_process_append	1.889425	1.889425	0.0	1.889425	0.0	0.0	0.0	0.0	0.0	121000000	0.2	0.2	43.545455	vmlinux	vfio_process_append	[Unknown]	0xffffffff81352350
+crfs_xip_file_write	1.794202	1.794202	0.0	0.992324	0.320751	0.481127	0.0	0.0	0.0	1331000000	14.1	14.1	3.322314	vmlinux	crfs_xip_file_write	[Unknown]	0xffffffff813591e0
+__memset_avx2	1.744084	1.744084	0.0	1.729049	0.005012	0.010023	0.0	0.0	0.0	935000000	6.1	6.1	4.682353	libc-2.23.so	__memset_avx2	memset-avx2.S	0x172a70
+vfio_process_compound	1.468439	1.468439	0.0	0.150352	0.621455	0.696631	0.0	0.0	0.0	66000000	2.0	2.0	52.500000	vmlinux	vfio_process_compound	[Unknown]	0xffffffff81352400
+kfree	0.841972	0.841972	0.0	0.025059	0.410962	0.405951	0.0	0.0	0.0	572000000	9.6	9.6	4.365385	vmlinux	kfree	[Unknown]	0xffffffff8123e590
+mutex_lock	0.631479	0.631479	0.0	0.631479	0.0	0.0	0.0	0.0	0.0	132000000	5.3	5.3	10.083333	vmlinux	mutex_lock	[Unknown]	0xffffffff819bf440
+__memcpy_avx_unaligned	0.606420	0.606420	0.0	0.606420	0.0	0.0	0.0	0.0	0.0	132000000	11.3	11.3	14.250000	libc-2.23.so	__memcpy_avx_unaligned	memcpy-avx-unaligned.S	0x14dfa0
+crfs_find_data_block	0.506185	0.506185	0.0	0.451056	0.035082	0.020047	0.0	0.0	0.0	902000000	3.4	3.4	1.719512	vmlinux	crfs_find_data_block	[Unknown]	0xffffffff81355d20
+vfio_crfss_io_append	0.506185	0.506185	0.0	0.506185	0.0	0.0	0.0	0.0	0.0	407000000	7.0	7.0	3.729730	vmlinux	vfio_crfss_io_append	[Unknown]	0xffffffff81351d70
+vfio_devfs_macro_io_parser	0.446045	0.446045	0.0	0.025059	0.135317	0.285669	0.0	0.0	0.0	473000000	8.2	8.2	3.604651	vmlinux	vfio_devfs_macro_io_parser	[Unknown]	0xffffffff81368180
+nvme_cmd_macro_iov	0.400939	0.400939	0.0	0.015035	0.165387	0.220516	0.0	0.0	0.0	1309000000	85.0	85.0	0.647059	libcrfslib.so	nvme_cmd_macro_iov	[Unknown]	0x8a51
+_cond_resched	0.390915	0.390915	0.0	0.345810	0.010023	0.035082	0.0	0.0	0.0	165000000	65.1	65.1	5.933333	vmlinux	_cond_resched	[Unknown]	0xffffffff819bd980
+crfs_add_logentry	0.380892	0.380892	0.0	0.380892	0.0	0.0	0.0	0.0	0.0	77000000	7.3	7.3	10.714286	vmlinux	crfs_add_logentry	[Unknown]	0xffffffff8135d8b0
+__pthread_mutex_unlock_usercnt	0.340798	0.0	0.0	0.0	0.0	0.0	0.0	0.340798	0.0	473000000	22.3	22.3	1.767442	libpthread-2.23.so	__pthread_mutex_unlock_usercnt	pthread_mutex_unlock.c	0xb4c0
+_int_free	0.330775	0.330775	0.0	0.330775	0.0	0.0	0.0	0.0	0.0	418000000	7.6	7.6	2.894737	libc-2.23.so	_int_free	malloc.c	0x7fd60
+__GI___pthread_mutex_lock	0.320751	0.0	0.0	0.0	0.0	0.0	0.0	0.320751	0.0	308000000	22.3	22.3	3.107143	libpthread-2.23.so	__GI___pthread_mutex_lock	pthread_mutex_lock.c	0x9d40
+vfio_crfss_io_write	0.250587	0.250587	0.0	0.005012	0.120282	0.125293	0.0	0.0	0.0	231000000	12.5	12.5	2.761905	vmlinux	vfio_crfss_io_write	[Unknown]	0xffffffff81352010
+devfs_checksumpwrite	0.240563	0.240563	0.0	0.005012	0.125293	0.110258	0.0	0.0	0.0	242000000	69.6	69.6	2.136364	libcrfslib.so	devfs_checksumpwrite	[Unknown]	0x9bf8
+vfio_process_micro_op_write	0.240563	0.240563	0.0	0.015035	0.100235	0.125293	0.0	0.0	0.0	407000000	63.2	63.2	1.243243	vmlinux	vfio_process_micro_op_write	[Unknown]	0xffffffff81367820
+get_const_curr_cred	0.235552	0.235552	0.0	0.045106	0.095223	0.095223	0.0	0.0	0.0	176000000	31.5	31.5	3.250000	vmlinux	get_const_curr_cred	[Unknown]	0xffffffff81353db0
+crfss_check_cred_table	0.210493	0.210493	0.0	0.210493	0.0	0.0	0.0	0.0	0.0	55000000	2.2	2.2	12.600000	vmlinux	crfss_check_cred_table	[Unknown]	0xffffffff81353ca0
+__GI_	0.205481	0.205481	0.0	0.205481	0.0	0.0	0.0	0.0	0.0	33000000	1.8	1.8	14.666667	libc-2.23.so	float __GI_(long, int, bool, char)	malloc.c	0x84540
+checksumpwrite_cmd	0.190446	0.190446	0.0	0.005012	0.070164	0.115270	0.0	0.0	0.0	132000000	67.3	67.3	4.500000	libcrfslib.so	checksumpwrite_cmd	[Unknown]	0xcfd6
+get_vir_time	0.170399	0.170399	0.0	0.005012	0.055129	0.110258	0.0	0.0	0.0	341000000	80.8	80.8	0.580645	libcrfslib.so	get_vir_time	[Unknown]	0x6cda
+recursive_alloc_blocks	0.160376	0.160376	0.0	0.160376	0.0	0.0	0.0	0.0	0.0	605000000	28.4	28.4	1.163636	vmlinux	recursive_alloc_blocks	[Unknown]	0xffffffff81355840
+mutex_unlock	0.150352	0.150352	0.0	0.150352	0.0	0.0	0.0	0.0	0.0	143000000	4.8	4.8	3.846154	vmlinux	mutex_unlock	[Unknown]	0xffffffff819bf4f0
+kmem_cache_alloc_trace	0.110258	0.110258	0.0	0.005012	0.035082	0.070164	0.0	0.0	0.0	275000000	90.9	90.9	0.800000	vmlinux	kmem_cache_alloc_trace	[Unknown]	0xffffffff8123d8e0
+memcpy_erms	0.085200	0.085200	0.0	0.0	0.025059	0.060141	0.0	0.0	0.0	154000000	56.8	56.8	1.142857	vmlinux	memcpy_erms	[Unknown]	0xffffffff81540d20
+__kmalloc	0.075176	0.075176	0.0	0.005012	0.030070	0.040094	0.0	0.0	0.0	209000000	26.0	26.0	0.736842	vmlinux	__kmalloc	[Unknown]	0xffffffff8123ee40
+__GI___libc_malloc	0.070164	0.070164	0.0	0.070164	0.0	0.0	0.0	0.0	0.0	594000000	100.0	100.0	0.185185	libc-2.23.so	__GI___libc_malloc	malloc.c	0x84180
+crfs_new_transaction	0.065153	0.065153	0.0	0.065153	0.0	0.0	0.0	0.0	0.0	165000000			1.333333	vmlinux	crfs_new_transaction	[Unknown]	0xffffffff8135d830
+unvme_do_devfs_io_macro	0.065153	0.065153	0.0	0.005012	0.020047	0.040094	0.0	0.0	0.0	253000000	80.8	80.8	0.782609	libcrfslib.so	unvme_do_devfs_io_macro	[Unknown]	0x8c5a
+irq_work_interrupt	0.060141	0.060141	0.0	0.005012	0.020047	0.035082	0.0	0.0	0.0	0	7.7	7.7		vmlinux	irq_work_interrupt	[Unknown]	0xffffffff819c45e0
+nvme_cmd_rw_new	0.055129	0.055129	0.0	0.005012	0.010023	0.040094	0.0	0.0	0.0	110000000	100.0	100.0	0.300000	libcrfslib.so	nvme_cmd_rw_new	[Unknown]	0x6e30
+crfs_new_data_block	0.050117	0.050117	0.0	0.050117	0.0	0.0	0.0	0.0	0.0	77000000	16.5	16.5	1.571429	vmlinux	crfs_new_data_block	[Unknown]	0xffffffff81355750
+apic_timer_interrupt	0.045106	0.045106	0.0	0.015035	0.015035	0.015035	0.0	0.0	0.0	0	22.7	22.7		vmlinux	apic_timer_interrupt	[Unknown]	0xffffffff819c3960
+crfs_write	0.045106	0.045106	0.0	0.045106	0.0	0.0	0.0	0.0	0.0	33000000			3.000000	libcrfslib.so	crfs_write	[Unknown]	0x8345
+crfs_xip_mem_protect	0.045106	0.045106	0.0	0.035082	0.005012	0.005012	0.0	0.0	0.0	33000000	26.0	26.0	2.333333	vmlinux	crfs_xip_mem_protect	[Unknown]	0xffffffff8135cfa0
+ktime_get	0.045106	0.045106	0.0	0.010023	0.015035	0.020047	0.0	0.0	0.0	0	0.0	0.0		vmlinux	ktime_get	[Unknown]	0xffffffff811446e0
+main	0.045106	0.045106	0.0	0.045106	0.0	0.0	0.0	0.0	0.0	44000000	69.9	69.9	3.250000	test_no_cache_offload_cache	main	[Unknown]	0x4013e8
+unvme_do_crfs_io	0.045106	0.045106	0.0	0.045106	0.0	0.0	0.0	0.0	0.0	187000000			0.647059	libcrfslib.so	unvme_do_crfs_io	[Unknown]	0x753f
+_int_malloc	0.040094	0.040094	0.0	0.040094	0.0	0.0	0.0	0.0	0.0	77000000	90.9	90.9	1.428571	libc-2.23.so	_int_malloc	malloc.c	0x81b90
+hrtimer_active	0.040094	0.040094	0.0	0.015035	0.010023	0.015035	0.0	0.0	0.0	0	0.0	0.0		vmlinux	hrtimer_active	[Unknown]	0xffffffff8113dcd0
+percpu_down_read	0.040094	0.040094	0.0	0.025059	0.005012	0.010023	0.0	0.0	0.0	132000000	26.0	26.0	0.583333	vmlinux	percpu_down_read	[Unknown]	0xffffffff81119170
+__crfs_alloc_blocks	0.035082	0.035082	0.0	0.035082	0.0	0.0	0.0	0.0	0.0	209000000			0.368421	vmlinux	__crfs_alloc_blocks	[Unknown]	0xffffffff81356110
+new_slab	0.035082	0.035082	0.0	0.035082	0.0	0.0	0.0	0.0	0.0	44000000	100.0	100.0	0.750000	vmlinux	new_slab	[Unknown]	0xffffffff8123c060
+task_tick_fair	0.035082	0.035082	0.0	0.020047	0.015035	0.0	0.0	0.0	0.0	121000000			0.0	vmlinux	task_tick_fair	[Unknown]	0xffffffff81108dd0
+vfio_process_micro_op_chksm	0.035082	0.035082	0.0	0.0	0.005012	0.030070	0.0	0.0	0.0	176000000	13.0	13.0	0.875000	vmlinux	vfio_process_micro_op_chksm	[Unknown]	0xffffffff81367ab0
+get_compound_vir_time	0.030070	0.030070	0.0	0.0	0.020047	0.010023	0.0	0.0	0.0	99000000	97.9	97.9	1.444444	libcrfslib.so	get_compound_vir_time	[Unknown]	0x89de
+irq_work_run_list	0.030070	0.030070	0.0	0.0	0.020047	0.010023	0.0	0.0	0.0	44000000	0.0	0.0	0.750000	vmlinux	irq_work_run_list	[Unknown]	0xffffffff811bc630
+ktime_get_update_offsets_now	0.030070	0.030070	0.0	0.0	0.020047	0.010023	0.0	0.0	0.0	11000000	0.0	0.0	6.000000	vmlinux	ktime_get_update_offsets_now	[Unknown]	0xffffffff81145920
+memcmp	0.030070	0.030070	0.0	0.030070	0.0	0.0	0.0	0.0	0.0	176000000	49.6	49.6	0.687500	vmlinux	memcmp	[Unknown]	0xffffffff8153b830
+rcu_check_callbacks	0.030070	0.030070	0.0	0.0	0.025059	0.005012	0.0	0.0	0.0	22000000			5.500000	vmlinux	rcu_check_callbacks	[Unknown]	0xffffffff81137900
+update_cfs_shares	0.030070	0.030070	0.0	0.005012	0.010023	0.015035	0.0	0.0	0.0	22000000	0.0	0.0	2.500000	vmlinux	update_cfs_shares	[Unknown]	0xffffffff81102d20
+__acct_update_integrals	0.025059	0.025059	0.0	0.0	0.025059	0.0	0.0	0.0	0.0	0	0.0	0.0		vmlinux	__acct_update_integrals	[Unknown]	0xffffffff8118b8f0
+_raw_spin_lock	0.025059	0.025059	0.0	0.015035	0.0	0.010023	0.0	0.0	0.0	33000000	0.0	0.0	0.666667	vmlinux	_raw_spin_lock	[Unknown]	0xffffffff819c1c80
+devfschecksumpwrite	0.025059	0.025059	0.0	0.0	0.010023	0.015035	0.0	0.0	0.0	33000000	14.0	14.0	4.333333	libcrfslib.so	devfschecksumpwrite	[Unknown]	0x557a
+run_local_timers	0.025059	0.025059	0.0	0.010023	0.005012	0.010023	0.0	0.0	0.0	44000000	0.0	0.0	0.750000	vmlinux	run_local_timers	[Unknown]	0xffffffff8113d970
+crfs_new_block	0.020047	0.020047	0.0	0.020047	0.0	0.0	0.0	0.0	0.0	110000000			1.900000	vmlinux	crfs_new_block	[Unknown]	0xffffffff81354bd0
+crfss_set_cred	0.020047	0.020047	0.0	0.0	0.005012	0.015035	0.0	0.0	0.0	0	0.0	0.0		vmlinux	crfss_set_cred	[Unknown]	0xffffffff81353e00
+generic_write_checks	0.020047	0.020047	0.0	0.005012	0.005012	0.010023	0.0	0.0	0.0	154000000	82.6	82.6	0.785714	vmlinux	generic_write_checks	[Unknown]	0xffffffff811d5c60
+kmem_cache_alloc	0.020047	0.020047	0.0	0.020047	0.0	0.0	0.0	0.0	0.0	99000000	100.0	100.0	0.555556	vmlinux	kmem_cache_alloc	[Unknown]	0xffffffff8123db10
+note_gp_changes	0.020047	0.020047	0.0	0.0	0.015035	0.005012	0.0	0.0	0.0	0	0.0	0.0		vmlinux	note_gp_changes	[Unknown]	0xffffffff811369e0
+__sb_end_write	0.015035	0.015035	0.0	0.015035	0.0	0.0	0.0	0.0	0.0	33000000	90.9	90.9	0.666667	vmlinux	__sb_end_write	[Unknown]	0xffffffff81267920
+crfs_alloc_blocks	0.015035	0.015035	0.0	0.015035	0.0	0.0	0.0	0.0	0.0	121000000			0.181818	vmlinux	crfs_alloc_blocks	[Unknown]	0xffffffff81356370
+crfs_update_isize	0.015035	0.015035	0.0	0.015035	0.0	0.0	0.0	0.0	0.0	154000000			0.357143	vmlinux	crfs_update_isize	[Unknown]	0xffffffff81356710
+crfswrite	0.015035	0.015035	0.0	0.015035	0.0	0.0	0.0	0.0	0.0	0	45.5	45.5		libcrfslib.so	crfswrite	[Unknown]	0x518a
+file_remove_privs	0.015035	0.015035	0.0	0.015035	0.0	0.0	0.0	0.0	0.0	0	100.0	100.0		vmlinux	file_remove_privs	[Unknown]	0xffffffff81281120
+percpu_up_read	0.015035	0.015035	0.0	0.015035	0.0	0.0	0.0	0.0	0.0	176000000	60.6	60.6	0.375000	vmlinux	percpu_up_read	[Unknown]	0xffffffff811191c0
+update_curr	0.015035	0.015035	0.0	0.0	0.010023	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	update_curr	[Unknown]	0xffffffff81102b80
+__hrtimer_run_queues	0.010023	0.010023	0.0	0.005012	0.0	0.005012	0.0	0.0	0.0	33000000			0.0	vmlinux	__hrtimer_run_queues	[Unknown]	0xffffffff8113e330
+__sb_start_write	0.010023	0.010023	0.0	0.010023	0.0	0.0	0.0	0.0	0.0	44000000	0.0	0.0	0.250000	vmlinux	__sb_start_write	[Unknown]	0xffffffff812680a0
+__switch_to	0.010023	0.010023	0.0	0.0	0.0	0.010023	0.0	0.0	0.0	22000000	0.0	0.0	0.0	vmlinux	__switch_to	[Unknown]	0xffffffff810814b0
+_raw_spin_trylock	0.010023	0.010023	0.0	0.005012	0.005012	0.0	0.0	0.0	0.0	0	0.0	0.0		vmlinux	_raw_spin_trylock	[Unknown]	0xffffffff819c1b00
+cpu_load_update	0.010023	0.010023	0.0	0.0	0.0	0.010023	0.0	0.0	0.0	22000000	0.0	0.0	1.000000	vmlinux	cpu_load_update	[Unknown]	0xffffffff81101ca0
+crfs_get_xip_mem	0.010023	0.010023	0.0	0.010023	0.0	0.0	0.0	0.0	0.0	77000000	100.0	100.0	0.285714	vmlinux	crfs_get_xip_mem	[Unknown]	0xffffffff81358c20
+crfs_update_time	0.010023	0.010023	0.0	0.010023	0.0	0.0	0.0	0.0	0.0	44000000	0.0	0.0	0.750000	vmlinux	crfs_update_time	[Unknown]	0xffffffff813567c0
+get_seconds	0.010023	0.010023	0.0	0.0	0.005012	0.005012	0.0	0.0	0.0	22000000	0.0	0.0	1.000000	vmlinux	get_seconds	[Unknown]	0xffffffff81143320
+io_serial_in	0.010023	0.010023	0.0	0.010023	0.0	0.0	0.0	0.0	0.0	0	0.0	0.0		vmlinux	io_serial_in	[Unknown]	0xffffffff81644640
+kmalloc_slab	0.010023	0.010023	0.0	0.0	0.0	0.010023	0.0	0.0	0.0	0	0.0	0.0		vmlinux	kmalloc_slab	[Unknown]	0xffffffff81202270
+raise_softirq	0.010023	0.010023	0.0	0.0	0.010023	0.0	0.0	0.0	0.0	22000000			0.0	vmlinux	raise_softirq	[Unknown]	0xffffffff810d53a0
+__GI	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0	0.0	0.0	0.0	ld-2.23.so	double __GI(double, long)	dl-tls.c	0x139a0
+__calc_delta	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	44000000	0.0	0.0	0.500000	vmlinux	__calc_delta	[Unknown]	0xffffffff810ffda0
+__do_softirq	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	33000000			0.0	vmlinux	__do_softirq	[Unknown]	0xffffffff819c4920
+__local_bh_enable	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0		vmlinux	__local_bh_enable	[Unknown]	0xffffffff810d4790
+_copy_from_user	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	_copy_from_user	[Unknown]	0xffffffff8153f8d0
+_raw_spin_lock_irqsave	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	_raw_spin_lock_irqsave	[Unknown]	0xffffffff819c1d20
+account_process_tick	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0		vmlinux	account_process_tick	[Unknown]	0xffffffff810ff020
+alloc_pages_current	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	alloc_pages_current	[Unknown]	0xffffffff81232460
+clear_page_c_e	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	clear_page_c_e	[Unknown]	0xffffffff8153f6c0
+cpu_load_update_active	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	cpu_load_update_active	[Unknown]	0xffffffff8110a380
+cpuacct_charge	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	cpuacct_charge	[Unknown]	0xffffffff81118960
+crfs_alloc_transaction	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0	0.0	0.0		vmlinux	crfs_alloc_transaction	[Unknown]	0xffffffff81364bb0
+crfss_create_file	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	crfss_create_file	[Unknown]	0xffffffff8135bca0
+do_lookup_x	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	ld-2.23.so	do_lookup_x	dl-lookup.c	0x9ea0
+func@0x3a50	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	libcrfslib.so	func@0x3a50	[Unknown]	0x3a50
+func@0x3cb0	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	libcrfslib.so	func@0x3cb0	[Unknown]	0x3cb0
+func@0xffffffff811197b7	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0		vmlinux	func@0xffffffff811197b7	[Unknown]	0xffffffff811197b7
+get_page_from_freelist	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0			0.0	vmlinux	get_page_from_freelist	[Unknown]	0xffffffff811df1e0
+ghes_proc_in_irq	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0	100.0	100.0		vmlinux	ghes_proc_in_irq	[Unknown]	0xffffffff81601fb0
+hrtimer_forward	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	hrtimer_forward	[Unknown]	0xffffffff8113dd60
+hrtimer_interrupt	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0	0.0	0.0		vmlinux	hrtimer_interrupt	[Unknown]	0xffffffff8113eae0
+io_serial_out	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	io_serial_out	[Unknown]	0xffffffff81644660
+irq_exit	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0	0.0	0.0		vmlinux	irq_exit	[Unknown]	0xffffffff810d5210
+irq_work_tick	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	irq_work_tick	[Unknown]	0xffffffff811bc810
+local_apic_timer_interrupt	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	local_apic_timer_interrupt	[Unknown]	0xffffffff810a63b0
+native_write_msr	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0	0.0	0.0		vmlinux	native_write_msr	[Unknown]	0xffffffff810b4ea0
+perf_event_task_tick	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	11000000	0.0	0.0	1.000000	vmlinux	perf_event_task_tick	[Unknown]	0xffffffff811c71b0
+pick_next_task_fair	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0		vmlinux	pick_next_task_fair	[Unknown]	0xffffffff8110b8e0
+profile_tick	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	33000000	0.0	0.0	0.0	vmlinux	profile_tick	[Unknown]	0xffffffff81139c90
+rb_insert_color	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	rb_insert_color	[Unknown]	0xffffffff815391b0
+rcu_all_qs	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0	0.0	0.0		vmlinux	rcu_all_qs	[Unknown]	0xffffffff81135690
+rcu_process_callbacks	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0				vmlinux	rcu_process_callbacks	[Unknown]	0xffffffff81136a80
+rcu_sysidle_enter	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	rcu_sysidle_enter	[Unknown]	0xffffffff811339d0
+read_tsc	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	11000000	0.0	0.0	1.000000	vmlinux	read_tsc	[Unknown]	0xffffffff8108b2b0
+release_vsq_entry	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	0	100.0	100.0		libcrfslib.so	release_vsq_entry	[Unknown]	0x71e8
+restore_regs_and_iret	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	restore_regs_and_iret	[Unknown]	0xffffffff819c2777
+run_posix_cpu_timers	0.005012	0.005012	0.0	0.0	0.005012	0.0	0.0	0.0	0.0	11000000	0.0	0.0	1.000000	vmlinux	run_posix_cpu_timers	[Unknown]	0xffffffff81142830
+run_timer_softirq	0.005012	0.005012	0.0	0.005012	0.0	0.0	0.0	0.0	0.0	0	100.0	100.0		vmlinux	run_timer_softirq	[Unknown]	0xffffffff8113c3a0
+scheduler_tick	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	scheduler_tick	[Unknown]	0xffffffff810fa950
+switch_mm_irqs_off	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	0	0.0	0.0	0.0	vmlinux	switch_mm_irqs_off	[Unknown]	0xffffffff810c2870
+tick_sched_timer	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	22000000	0.0	0.0	2.000000	vmlinux	tick_sched_timer	[Unknown]	0xffffffff8114d2c0
+trigger_load_balance	0.005012	0.005012	0.0	0.0	0.0	0.005012	0.0	0.0	0.0	11000000	100.0	100.0	1.000000	vmlinux	trigger_load_balance	[Unknown]	0xffffffff8110c370
+___slab_alloc	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	___slab_alloc	[Unknown]	0xffffffff8123d2b0
+account_entity_enqueue	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	account_entity_enqueue	[Unknown]	0xffffffff811024c0
+account_system_time	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	account_system_time	[Unknown]	0xffffffff810fed20
+crfs_commit_transaction	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	22000000	0.0	0.0	0.500000	vmlinux	crfs_commit_transaction	[Unknown]	0xffffffff8135d950
+delay_tsc	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0	100.0	100.0		vmlinux	delay_tsc	[Unknown]	0xffffffff8153fee0
+func@0x38c0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	1.000000	libcrfslib.so	func@0x38c0	[Unknown]	0x38c0
+func@0x3bc0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	libcrfslib.so	func@0x3bc0	[Unknown]	0x3bc0
+func@0x3be0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	libcrfslib.so	func@0x3be0	[Unknown]	0x3be0
+func@0x3da0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0	90.9	90.9		libcrfslib.so	func@0x3da0	[Unknown]	0x3da0
+func@0xffffffff811d5d25	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0	100.0	100.0		vmlinux	func@0xffffffff811d5d25	[Unknown]	0xffffffff811d5d25
+intel_pstate_update_util	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	intel_pstate_update_util	[Unknown]	0xffffffff8182fd90
+irq_enter	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	22000000	0.0	0.0	0.0	vmlinux	irq_enter	[Unknown]	0xffffffff810d51b0
+mod_zone_page_state	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	1.000000	vmlinux	mod_zone_page_state	[Unknown]	0xffffffff811fb1b0
+prepend_name	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	prepend_name	[Unknown]	0xffffffff8127b6f0
+rb_next	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	22000000	0.0	0.0	0.0	vmlinux	rb_next	[Unknown]	0xffffffff81539a30
+rcu_irq_enter	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	2.000000	vmlinux	rcu_irq_enter	[Unknown]	0xffffffff81138990
+rcu_momentary_dyntick_idle	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	rcu_momentary_dyntick_idle	[Unknown]	0xffffffff81133f30
+rcu_sysidle_exit	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	1.000000	vmlinux	rcu_sysidle_exit	[Unknown]	0xffffffff811387e0
+sched_avg_update	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000			0.0	vmlinux	sched_avg_update	[Unknown]	0xffffffff810f81a0
+select_idle_sibling	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	select_idle_sibling	[Unknown]	0xffffffff81100e00
+smp_apic_timer_interrupt	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000			0.0	vmlinux	smp_apic_timer_interrupt	[Unknown]	0xffffffff819c47f0
+timerqueue_add	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	22000000	0.0	0.0	0.0	vmlinux	timerqueue_add	[Unknown]	0xffffffff8153bd10
+unmap_page_range	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	unmap_page_range	[Unknown]	0xffffffff8120cb70
+update_blocked_averages	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	44000000	0.0	0.0	0.0	vmlinux	update_blocked_averages	[Unknown]	0xffffffff81104310
+update_fast_timekeeper	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	update_fast_timekeeper	[Unknown]	0xffffffff81143ca0
+update_process_times	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	11000000	0.0	0.0	0.0	vmlinux	update_process_times	[Unknown]	0xffffffff8113d9c0
+update_sd_lb_stats	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	0.0	22000000	0.0	0.0	0.0	vmlinux	update_sd_lb_stats	[Unknown]	0xffffffff8110a5d0

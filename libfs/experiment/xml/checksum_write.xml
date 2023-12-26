@@ -1,0 +1,23 @@
+<?xml version="1.0"?> 
+
+<data>
+	<name>FusionFS Checksum </name>
+	<folder>FusionFS_Checksum</folder>
+
+	<run>
+		<name>16 threads</name>
+		<folder>16_treads</folder>
+		<key>16</key>
+		<description>checksum write 128 files, 100MB each</description>
+        <command>$OFFLOADBASE/libfs/benchmark/test_no_cache_offload_cache 1 4096 64 100 128</command>
+	</run>
+
+	<run>
+		<name>16 threads</name>
+		<folder>16_treads_cache</folder>
+		<key>16</key>
+		<description>checksum write 128 files, 100MB each</description>
+        <command>$OFFLOADBASE/libfs/benchmark/test_selective_offload_cache 1 4096 64 100 128</command>
+	</run>
+
+</data>
