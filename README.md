@@ -114,6 +114,7 @@ Assume the current directory is the project root directory.
 $ cd omnicache-fast24-artifacts
 $ source scripts/setvars.sh
 $ cd $BASE/libfs/benchmark/
+$ mkdir build
 $ make
 ```
 
