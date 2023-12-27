@@ -84,15 +84,24 @@ $ make && make install
 
 ### 5. Mount NearStorageFS
 
+First, check where the storage is mounted
+```
+$ ls /dev/pmem*
+```
+The output could be /dev/pmem0 or /dev/pmem1
+
+Then mount the near-storage FS to either /dev/pmem0 or /dev/pmem1
 ```
 $ cd $BASE/libfs
-$ ./scripts/mount_nearstoragefs.sh
+$ ./scripts/mount_nearstoragefs.sh pmem0
+or
+$ ./scripts/mount_nearstoragefs.sh pmem1
 ```
 
 If successful, you will find a NearStorageFS (device-level FS) mounted as follows after executing the `lsblk`
 
 ```
-pmem1       259:3    0 248.1G  0 disk /mnt/ram
+pmem0       259:3    0 248.1G  0 disk /mnt/ram
 ```
 
 # Running Experiments:
