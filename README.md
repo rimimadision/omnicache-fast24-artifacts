@@ -172,14 +172,21 @@ $ python3 results-extract.py
 $ cat RESULT.csv
 ```
 
+#### 6. Reboot system (optional): 
+
+The system may require occasional restarts because of a compatibility issue between our motherboard and Optane0, which makes Optane responsive. To reboot, we recommend using our hardware reboot emergency script instead of the traditional sudo reboot. To use our emergency script,
+```
+//Navigate to the artifact's root folder
+$ cd /localhome/aereview/omnicache-fast24-artifacts
+$ sudo scripts/emergency.sh   
+```
 
 ### Run LevelDB
-
 Assume the current directory is the project root directory.
 
 #### 1. Compile SHIM Library
 
-SHIM library is responsible for intercepting POSIX I/O operations and directing them to the OmniCache library for converting them to NearStorageFS commands.
+SHIM library intercepts POSIX I/O operations and directs them to the OmniCache library for converting them to NearStorageFS commands.
 
 ```
 $ cd $BASE/libfs/libshim
