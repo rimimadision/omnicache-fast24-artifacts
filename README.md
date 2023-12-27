@@ -259,7 +259,12 @@ $ ./figure4_nova.sh
 ```
 
 # Known issues 
+1. The system may require occasional restarts because of a compatibility issue between our motherboard and Optane0, which makes Optane irresponsive. To reboot, we recommend using our hardware reboot emergency script instead of the traditional sudo reboot. To use our emergency script,
+```
+//Navigate to the artifact's root folder
+$ cd /localhome/aereview/omnicache-fast24-artifacts
+$ sudo scripts/emergency.sh   
+```
+After rebooting, as mentioned in step 4 above, make sure to set the environmental variable again.
 
-1. The system may require occasional restart because of some Optane compatibility issues
-
-2. LevelDB may occasionally hang after dbbench finishes. Simply pressing Ctrl-c to kill the process can solve the issue.
+3. LevelDB may occasionally hang after dbbench finishes. Simply pressing Ctrl-c to kill the process can solve the issue.
