@@ -174,7 +174,7 @@ $ cat RESULT.csv
 
 #### 6. Reboot system (optional): 
 
-The system may require occasional restarts because of a compatibility issue between our motherboard and Optane0, which makes Optane responsive. To reboot, we recommend using our hardware reboot emergency script instead of the traditional sudo reboot. To use our emergency script,
+The system may require occasional restarts because of a compatibility issue between our motherboard and Optane hardware, which makes Optane responsive. To reboot, we recommend using our hardware reboot emergency script instead of the traditional sudo reboot. To use our emergency script,
 ```
 //Navigate to the artifact's root folder
 $ cd /localhome/aereview/omnicache-fast24-artifacts
