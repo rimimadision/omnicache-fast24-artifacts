@@ -3,5 +3,5 @@ sudo dmesg -c
 DEBUG=$1
 sudo mkdir $STORAGEPATH
 #sudo mount -t crfs -o physaddr=0x1400000000,init=80g none /mnt/ram	#starting at physical ram 32GB, size is 16GB
-sudo mount -t crfs -o init /dev/pmem1 /mnt/ram	#starting at physical ram 32GB, size is 16GB
+sudo mount -t crfs -o init /dev/$1 /mnt/ram	#starting at physical ram 32GB, size is 16GB
 sudo chown -R $USER $STORAGEPATH
