@@ -60,7 +60,7 @@ export OUTPUTDIR=$APPBENCH/output
 export TEST_TMPDIR=/mnt/pmemdir
 
 export RESULTS=$OFFLOADBASE/RESULTS/$MACHINE
-export AERESULTS=$OFFLOADBASE/AE-RESULTS-PERFOPT/
+export AERESULTS=$OFFLOADBASE/AE-RESULTS/
 export VTUNE_PATH=/opt/intel/vtune_amplifier_2019
 export RESULTS_PATH=$OFFLOADBASE/libfs/experiment/results 
 

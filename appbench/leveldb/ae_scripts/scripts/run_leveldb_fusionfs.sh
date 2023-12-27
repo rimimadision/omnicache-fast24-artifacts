@@ -5,8 +5,8 @@ PARAFS=$OFFLOADBASE
 DBPATH=/mnt/ram
 BENCHMARK=fillrandom,readrandom
 WORKLOADDESCR="fillrandom-readrandom"
-AERESULTDIR=$PWD
-KEYS=300000
+#AERESULTDIR=$PWD
+KEYS=200000
 
 $BASE/appbench/leveldb/ae_scripts/scripts/kill_leveldb_fusionfs.sh &
 echo "BEGIN TO RUN"

@@ -5,8 +5,8 @@ PARAFS=$OFFLOADBASE
 DBPATH=/mnt/ram
 BENCHMARK=fillrandom,readrandom
 WORKLOADDESCR="fillrandom-readrandom"
-AERESULTDIR=$PWD
-KEYS=300000
+#AERESULTDIR=$PWD
+KEYS=200000
 
 # Create output directories
 if [ ! -d "$RESULTDIR" ]; then

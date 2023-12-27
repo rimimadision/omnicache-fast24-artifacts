@@ -2,9 +2,9 @@
 Table for fillrandom
 -----------------------
 Threads,FusionFS,HostCache-user-level,OmniCache
-fillrandom,34.8,29.1,29.7
+fillrandom,30.5,32.9,33.4
 -----------------------
 Table for readrandom
 -----------------------
 Threads,FusionFS,HostCache-user-level,OmniCache
-readrandom,61.9,73.7,146.0
+readrandom,196.2,335.0,373.4
