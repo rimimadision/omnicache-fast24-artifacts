@@ -1178,19 +1178,19 @@ int initialize_crfs(unsigned int qentry_count,
 /* #endif */
         if (shell_host_cache_env) {
             HOST_CACHE_LIMIT = strtoul(shell_host_cache_env, NULL, 10);
-            printf("host cache limit: %ld\n", HOST_CACHE_LIMIT);
+            /* printf("host cache limit: %ld\n", HOST_CACHE_LIMIT); */
         } else {
-            printf("host cache is unlimited.\n");
+            /* printf("host cache is unlimited.\n"); */
         }
 
         if (shell_dev_cache_env) {
             DEV_CACHE_LIMIT = strtoul(shell_dev_cache_env, NULL, 10);
-            printf("dev cache limit: %ld\n", DEV_CACHE_LIMIT);
+            /* printf("dev cache limit: %ld\n", DEV_CACHE_LIMIT); */
         } else {
-            printf("dev cache is unlimited.\n");
+            /* printf("dev cache is unlimited.\n"); */
         }
         CACHE_LIMIT = HOST_CACHE_LIMIT + DEV_CACHE_LIMIT;
-        printf("total cache limit: %ld\n", CACHE_LIMIT);
+        /* printf("total cache limit: %ld\n", CACHE_LIMIT); */
 //#endif
 
 #ifdef COMPRESS_CACHE

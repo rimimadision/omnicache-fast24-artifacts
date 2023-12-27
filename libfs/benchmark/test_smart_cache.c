@@ -324,7 +324,7 @@ void* do_seq_read(void* arg) {
         thruput = (double)(file_num_per_thd * (end - start) * BLOCKSIZE) / sec;
         //thruput = (double)((end - start)*1.0 * BLOCKSIZE) / sec;
 
-        printf("# of pread: %ld, thruput: %lf \n", end - start, thruput); 
+        /* printf("# of pread: %ld, thruput: %lf \n", end - start, thruput);  */
         pthread_mutex_lock(&g_lock);
         g_avgthput += thruput;
         pthread_mutex_unlock(&g_lock);
@@ -410,7 +410,7 @@ void* do_seq_write(void* arg) {
         thruput = (double)(file_num_per_thd * (end - start) * BLOCKSIZE) / sec;
         //thruput = (double)((end - start)*1.0 * BLOCKSIZE) / sec;
 
-        printf("# of pwrite: %ld \n", end - start); 
+        /* printf("# of pwrite: %ld \n", end - start);  */
         pthread_mutex_lock(&g_lock);
         g_avgthput += thruput;
         pthread_mutex_unlock(&g_lock);
@@ -496,7 +496,7 @@ void* do_rand_read(void* arg) {
         thruput = (double)(file_num_per_thd * (end - start) * BLOCKSIZE) / sec;
         //thruput = (double)((end - start)*1.0 * BLOCKSIZE) / sec;
 
-        printf("# of pread: %ld, thruput: %lf \n", end - start, thruput); 
+        /* printf("# of pread: %ld, thruput: %lf \n", end - start, thruput);  */
         pthread_mutex_lock(&g_lock);
         g_avgthput += thruput;
         pthread_mutex_unlock(&g_lock);
@@ -581,7 +581,7 @@ void* do_rand_write(void* arg) {
         thruput = (double)(file_num_per_thd * (end - start) * BLOCKSIZE) / sec;
         //thruput = (double)((end - start)*1.0 * BLOCKSIZE) / sec;
 
-        printf("# of pwrite: %ld \n", end - start); 
+        /* printf("# of pwrite: %ld \n", end - start);  */
         pthread_mutex_lock(&g_lock);
         g_avgthput += thruput;
         pthread_mutex_unlock(&g_lock);
@@ -937,7 +937,7 @@ int main(int argc, char **argv) {
         for (int k = 0; k < filenum; k++) {
                 snprintf(test_file, 256, "%s/testfile%d", TESTDIR,
                          k);
-                printf("create new file: %s, size: %ld\n", test_file, FILESIZE);
+                /* printf("create new file: %s, size: %ld\n", test_file, FILESIZE); */
 
 #ifndef _POSIX
                 /* Step 1: Create Testing File */
@@ -993,7 +993,7 @@ int main(int argc, char **argv) {
         }
         gettimeofday(&end, NULL);
         sec = simulation_time(start, end);
-        printf("finished all writing, sec: %.2lf s\n", sec);
+        /* printf("finished all writing, sec: %.2lf s\n", sec); */
 
         tid = malloc(thread_nr * sizeof(pthread_t));
         thread_idx = malloc(thread_nr * sizeof(int));
@@ -1013,8 +1013,8 @@ int main(int argc, char **argv) {
 
         gettimeofday(&end, NULL);
         sec = simulation_time(start, end);
-        printf("Benchmark takes %.2lf s, average thruput %lf B/s\n", sec,
-               g_avgthput);
+        /* printf("Benchmark takes %.2lf s, average thruput %lf B/s\n", sec, */
+               /* g_avgthput); */
         printf("Benchmark takes %.2lf s, average thruput %.2lf GB/s\n", sec,
                g_avgthput / 1024 / 1024 / 1024);
         printf("Benchmark completed \n");

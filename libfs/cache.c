@@ -1359,7 +1359,7 @@ void drop_all_cache(uinode **all_inodes, long all_files_cnt){
     uinode *inode = NULL;
     uinode *evict_inode = NULL;
     ufile *fp = NULL;
-    printf("drop all cache, cnt: %d\n", all_files_cnt);
+    /* printf("drop all cache, cnt: %d\n", all_files_cnt); */
     int idx = 0;
 
     for (int i = 0; i< all_files_cnt;i++){
