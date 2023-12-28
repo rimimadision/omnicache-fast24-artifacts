@@ -5,7 +5,7 @@ import re
 # Define the arrays
 thread_arr = [1, 4, 16, 32]
 #workload_arr = ["pvt_seq", "pvt_rand"]
-workload_arr = ["randread", "randwrite"]
+workload_arr = ["seqread", "seqwrite"]
 config_arr = ["fusionfs", "hostcache", "lambdaio-emulate", "omnicache"]
 config_out_arr = ["FusionFS", "HostCache-user-level", "lambda-IO-emulate", "OmniCache"]
 readsize_arr = ["128"]
@@ -15,7 +15,7 @@ output_dir = os.environ.get("AERESULTS", "")
 base_dir_template = f"{output_dir}/microbench/figure4/{{config}}/{{workload}}/{{thd}}/"
 
 # Output CSV file
-output_file = "figure4-RESULT.csv"
+output_file = "RESULT-seq.csv"
 
 # Function to extract the value before "MB/s" from a line and round to the nearest integer
 def extract_and_round_ops_per_sec(line):

@@ -1,4 +1,4 @@
-all: test_smart_cache_cisc_host test_smart_cache_cisc_hybrid test_direct_cisc_io test_smart_cache_posix_host test_smart_cache_posix_hybrid test_direct_posix_io test_smart_cache_posix_hybrid_cxl test_direct_posix_fs
+all: test_smart_cache_cisc_host test_smart_cache_cisc_hybrid test_direct_cisc_io test_smart_cache_posix_host test_smart_cache_posix_hybrid test_direct_posix_io test_smart_cache_posix_hybrid_cxl test_direct_posix_fs test_smart_cache_posix_hybrid_seq test_smart_cache_posix_host_seq
 
 CODE=.
 CXX=g++
@@ -21,8 +21,14 @@ test_direct_posix_io: test_smart_cache.c
 test_smart_cache_posix_host: test_smart_cache.c
 	$(CC) $(INCLUDE) $(FLAGS) -DVALUE_SIZE -DCRFS_POSIX test_smart_cache.c ../crc32/crc32.c -o $(BUILD)/test_smart_cache_posix_host $(LIB_S) -lcrfslib_wb_host
 
+test_smart_cache_posix_host_seq: test_smart_cache.c
+	$(CC) $(INCLUDE) $(FLAGS) -DVALUE_SIZE -DCRFS_POSIX -DCRFS_SEQ test_smart_cache.c ../crc32/crc32.c -o $(BUILD)/test_smart_cache_posix_host_seq $(LIB_S) -lcrfslib_wb_host
+
 test_smart_cache_posix_hybrid: test_smart_cache.c 
 	$(CC) $(INCLUDE) $(FLAGS) -DVALUE_SIZE -DCRFS_POSIX test_smart_cache.c ../crc32/crc32.c -o $(BUILD)/test_smart_cache_posix_hybrid $(LIB_S) -lcrfslib_wb_hybrid
+
+test_smart_cache_posix_hybrid_seq: test_smart_cache.c 
+	$(CC) $(INCLUDE) $(FLAGS) -DVALUE_SIZE -DCRFS_POSIX -DCRFS_SEQ test_smart_cache.c ../crc32/crc32.c -o $(BUILD)/test_smart_cache_posix_hybrid_seq $(LIB_S) -lcrfslib_wb_hybrid
 
 test_smart_cache_posix_hybrid_cxl: test_smart_cache.c 
 	$(CC) $(INCLUDE) $(FLAGS) -DVALUE_SIZE -DCRFS_POSIX test_smart_cache.c ../crc32/crc32.c -o $(BUILD)/test_smart_cache_posix_hybrid_cxl $(LIB_S) -lcrfslib_wb_hybrid_cxl

@@ -6,17 +6,16 @@ import re
 thread_arr = [1, 4, 16, 32]
 #workload_arr = ["pvt_seq", "pvt_rand"]
 workload_arr = ["randread", "randwrite"]
-config_arr = ["nova", "hostcache", "omnicache", "omnicachecxl"]
-config_out_arr = ["nova", "HostCache-user-level", "OmniCache", "OmniCXL"]
+config_arr = ["fusionfs", "hostcache", "lambdaio-emulate", "omnicache"]
+config_out_arr = ["FusionFS", "HostCache-user-level", "lambda-IO-emulate", "OmniCache"]
 readsize_arr = ["128"]
 
 # Base directory for output files
 output_dir = os.environ.get("AERESULTS", "")
-base_dir_template1 = f"{output_dir}/microbench/figure4/{{config}}/{{workload}}/{{thd}}/"
-base_dir_template2 = f"{output_dir}/microbench/figure11/{{config}}/{{workload}}/{{thd}}/"
+base_dir_template = f"{output_dir}/microbench/figure4/{{config}}/{{workload}}/{{thd}}/"
 
 # Output CSV file
-output_file = "RESULT.csv"
+output_file = "RESULT-rand.csv"
 
 # Function to extract the value before "MB/s" from a line and round to the nearest integer
 def extract_and_round_ops_per_sec(line):
@@ -62,10 +61,7 @@ def main():
                     workload_data = [thd]
                     for config in config_arr: 
 
-                        if config == "omnicachecxl":
-                            base_dir = base_dir_template2.format(workload=workload, config=config, thd=thd)
-                        else:
-                            base_dir = base_dir_template1.format(workload=workload, config=config, thd=thd)
+                        base_dir = base_dir_template.format(workload=workload, config=config, thd=thd)
 
                         file_path = os.path.join(base_dir, f"result.txt")
                         if os.path.exists(file_path):

@@ -274,6 +274,7 @@ void* do_seq_read(void* arg) {
         int file_num_start = 0;
         int file_num_end = 1;
         int* fd = (int *)malloc(512 * sizeof(int));
+        int round = 2;
 
         if (filenum >= thread_nr) {
                 file_num_per_thd = (filenum / thread_nr);
@@ -297,6 +298,9 @@ void* do_seq_read(void* arg) {
         }
 
         gettimeofday(&start_t, NULL);
+#ifdef CRFS_SEQ
+        for (int q = 0; q < round; q++) {
+#endif
         for (k = 0; k < file_num_per_thd; k++) {
 
             for (i = start; i < end; i++) {
@@ -317,6 +321,9 @@ void* do_seq_read(void* arg) {
                 }
             }
         }
+#ifdef CRFS_SEQ
+        }
+#endif
 
         /* printf("file_num_per_thd: %ld, end: %ld, start: %d\n", file_num_per_thd, end, start); */
         gettimeofday(&end_t, NULL);
@@ -361,6 +368,7 @@ void* do_seq_write(void* arg) {
         int file_num_start = 0;
         int file_num_end = 1;
         int* fd = (int *)malloc(512 * sizeof(int));
+        int round = 4;
 
         if (filenum >= thread_nr) {
                 file_num_per_thd = (filenum / thread_nr);
@@ -385,6 +393,9 @@ void* do_seq_write(void* arg) {
         }
 
         gettimeofday(&start_t, NULL);
+#ifdef CRFS_SEQ
+        for (int q=0;q<round;q++) {
+#endif
         for (k = 0; k < file_num_per_thd; k++) {
 
             for (i = start; i < end; i++) {
@@ -404,6 +415,9 @@ void* do_seq_write(void* arg) {
                 }
             }
         }
+#ifdef CRFS_SEQ
+        }
+#endif
 
         gettimeofday(&end_t, NULL);
         sec = simulation_time(start_t, end_t);
