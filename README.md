@@ -129,11 +129,22 @@ Expect output will be similar to ```Benchmark takes 0.97 s, average thruput 4.45
 
 #### 1. Run (**Figure 4**):
 
+For sequential access (Figure 4a and Figure 4b)
+
 ```
 $ cd $BASE/libfs/benchmark/ae_scripts/figure4
-$ ./figure4.sh
-$ python3 results-extract.py
-$ cat RESULT.csv
+$ ./figure4-seq.sh
+$ python3 results-extract-seq.py
+$ cat RESULT-seq.csv
+```
+
+For random access (Figure 4c and Figure 4d)
+
+```
+$ cd $BASE/libfs/benchmark/ae_scripts/figure4
+$ ./figure4-rand.sh
+$ python3 results-extract-rand.py
+$ cat RESULT-rand.csv
 ```
 
 #### 2. Run (**Figure 6**):
