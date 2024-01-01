@@ -1718,7 +1718,7 @@ int crfs_rename(const char *oldpath, const char *newpath)
 	int ret;
 	struct vfio_crfs_rename_cmd map;
 
-    printf("rename, old: %s, new: %s\n", oldpath, newpath);
+    /* printf("rename, old: %s, new: %s\n", oldpath, newpath); */
 #if defined CRFS_WT_CACHE && !defined LEVELDB_CACHE
 	    crfs_mutex_lock(&uinode_table_lock);
         printf("rename, old: %s, new: %s\n", oldpath, newpath);

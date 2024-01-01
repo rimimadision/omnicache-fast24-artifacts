@@ -19,9 +19,12 @@
 #include "util/testutil.h"
 #include <sys/mman.h>
 #include <sys/time.h>
+#include <inttypes.h>
+
 #include <sys/time.h>
 #include <sys/resource.h>
 
+#include "util/trace.h"
 #include "unvme_nvme.h"
 #include "crfslib.h"
 
@@ -119,6 +122,16 @@ static bool FLAGS_use_existing_db = false;
 
 // Use the db with the following name.
 static const char* FLAGS_db = NULL;
+
+static std::vector<uint64_t> ycsb_insertion_sequence;
+
+// YCSB operations num
+static int FLAGS_ycsb_ops_num= 1000000;
+
+static int FLAGS_seek_nexts = 50;
+
+// DEFINE_int64(ycsb_ops_num, 1000000, "YCSB operations num");
+static leveldb::YCSBLoadType FLAGS_ycsb_type = leveldb::kYCSB_A;
 
 namespace leveldb {
 
@@ -308,6 +321,7 @@ struct ThreadState {
   Random rand;         // Has different seeds for different threads
   Stats stats;
   SharedState* shared;
+  RandomGenerator gen;
 
   ThreadState(int index)
       : tid(index),
@@ -447,7 +461,7 @@ class Benchmark {
 	  unsigned long long key;
 	  unsigned long param;
   };
-  struct trace_operation_t *trace_ops[10]; // Assuming maximum of 10 concurrent threads
+  struct trace_operation_t *trace_ops[32]; // Assuming maximum of 10 concurrent threads
 	
 	struct result_t {
 		unsigned long long ycsbdata;
@@ -464,7 +478,7 @@ class Benchmark {
 		unsigned long long kv_itnext;
 	};
 	
-  struct result_t results[10];
+  struct result_t results[32];
 	
   unsigned long long print_splitup(int tid) {
 	  struct result_t& result = results[tid];
@@ -642,8 +656,116 @@ class Benchmark {
 	
   #define envinput(var, type) {assert(getenv(#var)); int ret = sscanf(getenv(#var), type, &var); assert(ret == 1);}
 	  #define envstrinput(var) strcpy(var, getenv(#var))
+
+  bool YCSBOperation(const YCSB_Op& operation, const Slice& ivalue, std::string* ovalue) {
+    static ReadOptions roption;
+    static WriteOptions woption;
+    static TraceUniform seekrnd(333, 1, 100);
+    bool res = false;
+    char key[100];
+    char value_buffer[256];
+    snprintf(key, sizeof(key), "%016llu", (unsigned long long)operation.key);
+    if (operation.type == kYCSB_Write) {
+      res = db_->Put(woption,key, ivalue).ok();
+    } else if (operation.type == kYCSB_Read) {
+      res = db_->Get(roption, key, ovalue).ok();
+    } else if (operation.type == kYCSB_Query) {
+      auto* iter = db_->NewIterator(roption);
+      iter->Seek(key);
+      if (iter->Valid()) {
+        if (iter->key() == key) {
+                          res = true;
+        }
+        int seeks = FLAGS_seek_nexts * (seekrnd.Next() / 100.0);
+        for (int j = 0; j < seeks && iter->Valid(); j++) {
+            // Copy out iterator's value to make sure we read them.
+            Slice value = iter->value();
+            memcpy(value_buffer, value.data(),
+            std::min(value.size(), sizeof(value_buffer)));
+            iter->Next();
+        }
+      }
+      delete iter;
+      iter = nullptr;
+    } else if (operation.type == kYCSB_ReadModifyWrite) {
+        res = db_->Get(roption, key, ovalue).ok();
+        if (res) {
+          db_->Put(woption, key, ivalue);
+        }
+    }
+
+    return res;
+  }
+
+   void YCSBLoad(ThreadState* thread) {
+    static WriteOptions woption;
+    RandomGenerator gen;
+    WriteBatch batch;
+    Status s;
+
+    int64_t bytes = 0;
+
+    // generate a random sequence
+    RandomSequence(FLAGS_num, ycsb_insertion_sequence);
+
+    thread->stats.Start();
+    for (uint64_t i = 0; i < FLAGS_num;) {
+      batch.Clear();
+      for (uint64_t j = 0; j < entries_per_batch_; j++) {
+        const uint64_t k = ycsb_insertion_sequence[i + j];
+        char key[100];
+        snprintf(key, sizeof(key), "%016" PRIu64 "", k);
+        batch.Put(key, gen.Generate(value_size_));
+        bytes += value_size_ + strlen(key);
+        thread->stats.FinishedSingleOp();
+      }
+      s = db_->Write(write_options_, &batch);
+      i+=entries_per_batch_;
+    }
+    thread->stats.AddBytes(bytes);
+  }
+
+   void YCSB(ThreadState* thread) {
+    Trace* ycsb_selector = nullptr;
+    if (FLAGS_ycsb_type == kYCSB_D) {
+      // use exponential distribution as selector to select more on front index
+      ycsb_selector = new TraceExponential(kYCSB_LATEST_SEED + thread->tid * 996, 50, FLAGS_num);
+    }
+    else {
+      ycsb_selector = new TraceUniform(kYCSB_SEED + FLAGS_ycsb_type * 333 + thread->tid * 996);
+    }
+
+    std::vector<YCSB_Op> ycsb_ops = YCSB_LoadGenerate(FLAGS_num, FLAGS_ycsb_ops_num, FLAGS_ycsb_type, ycsb_selector, ycsb_insertion_sequence);
+    Status s;
+    uint64_t len = FLAGS_ycsb_ops_num;
+    if (FLAGS_ycsb_type == kYCSB_E) {
+      len = len / 4;
+    }
+    int64_t bytes = 0;
+
+    thread->stats.Start();
+    uint64_t found = 0;
+    uint64_t total_ops = 0;
+    std::string ovalue;
+    for (uint64_t i = 0; i < len; ++i) {
+      total_ops++;
+      Slice ivalue = thread->gen.Generate(value_size_);
+      bool op_res = YCSBOperation(ycsb_ops[i], ivalue, &ovalue);
+      if ((ycsb_ops[i].type == kYCSB_Read || ycsb_ops[i].type == kYCSB_ReadModifyWrite || ycsb_ops[i].type == kYCSB_Query) &&
+          op_res) {
+        found++;
+      }
+      bytes += ycsb_ops[i].type == kYCSB_Query ? (value_size_  + 16) * FLAGS_seek_nexts : (value_size_  + 16);
+      thread->stats.FinishedSingleOp();
+    }
+    thread->stats.AddBytes(bytes);
+
+    char msg[100];
+    snprintf(msg, sizeof(msg), "(%llu of %llu found)", found, total_ops);
+    thread->stats.AddMessage(msg);
+  }
 	
-  void YCSB(ThreadState* thread) {
+  void YCSB_old(ThreadState* thread) {
 	  int tid = thread->tid;
 	  char trace_file[1000];
 		
@@ -736,6 +858,28 @@ class Benchmark {
       int num_threads = FLAGS_threads;
 
       if (name == Slice("ycsb")) {
+        method = &Benchmark::YCSB_old;
+      } else if (name == Slice("load")) {
+        fresh_db = true;
+        num_threads = 1;
+        method = &Benchmark::YCSBLoad;
+      } else if (name == Slice("ycsba")) {
+        FLAGS_ycsb_type = kYCSB_A;
+        method = &Benchmark::YCSB;
+      } else if (name == Slice("ycsbb")) {
+        FLAGS_ycsb_type = kYCSB_B;
+        method = &Benchmark::YCSB;
+      } else if (name == Slice("ycsbc")) {
+        FLAGS_ycsb_type = kYCSB_C;
+        method = &Benchmark::YCSB;
+      } else if (name == Slice("ycsbd")) {
+        FLAGS_ycsb_type = kYCSB_D;
+        method = &Benchmark::YCSB;
+      } else if (name == Slice("ycsbe")) {
+        FLAGS_ycsb_type = kYCSB_E;
+        method = &Benchmark::YCSB;
+      } else if (name == Slice("ycsbf")) {
+        FLAGS_ycsb_type = kYCSB_F;
         method = &Benchmark::YCSB;
       } else if (name == Slice("fillseq")) {
         fresh_db = true;
@@ -1248,6 +1392,8 @@ int main(int argc, char** argv) {
       FLAGS_use_existing_db = n;
     } else if (sscanf(argv[i], "--num=%d%c", &n, &junk) == 1) {
       FLAGS_num = n;
+    } else if (sscanf(argv[i], "--ycsb_ops_num=%d%c", &n, &junk) == 1) {
+      FLAGS_ycsb_ops_num = n;
     } else if (sscanf(argv[i], "--dowrite_max_key=%d%c", &n, &junk) == 1) {
       FLAGS_DoWrite_max_key = n;
     } else if (sscanf(argv[i], "--dowrite_skew_max_log=%d%c", &n, &junk) == 1) {

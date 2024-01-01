@@ -1,76 +1,0 @@
-LevelDB:    version 1.18
-Date:       Fri Dec 22 01:30:02 2023
-CPU:        64 * Intel(R) Xeon(R) Gold 5218 CPU @ 2.30GHz
-CPUCache:   22528 KB
-Thread 0: Parsing trace ...
-Thread 0: Done parsing, 5000 operations.
-Thread 0: Replaying trace ...
-
-Completed 0 ops... finished 100 ops                              ... finished 200 ops                              ... finished 300 ops                              ... finished 400 ops                              ... finished 500 ops                              ... finished 600 ops                              ... finished 700 ops                              ... finished 800 ops                              ... finished 900 ops                              ... finished 1000 ops                              ... finished 1500 ops                              ... finished 2000 ops                              ... finished 2500 ops                              ... finished 3000 ops                              ... finished 3500 ops                              ... finished 4000 ops                              ... finished 4500 ops                              ... finished 5000 ops                              
-
-Thread 0: Done replaying 5000 operations.
-YCSB splitup: R = 0, D = 0, I = 5000, U = 0, S = 0
-LevelDB/WiscKey splitup: P = 5000, G = 0, D = 0, ItSeek = 0, ItNext = 0
-Thread 0: Time taken = 0.049 seconds
-Thread 0: Total data: YCSB = 0.005043 GB, HyperLevelDB = 0.005043 GB
-Thread 0: Ops/s = 99.692 Kops/s
-Thread 0: YCSB throughput = 105.423897 MB/s
-Thread 0: HyperLevelDB throughput = 105.423897 MB/s
-host cache limit: 34359738368
-dev cache is unlimited.
-total cache limit: 34359738368
-create queue buffer success
-Keys:       16 bytes each
-Values:     100 bytes each (50 bytes after compression)
-Entries:    1000000
-RawSize:    110.6 MB (estimated)
-FileSize:   62.9 MB (estimated)
-WARNING: Snappy compression is not enabled
-------------------------------------------------
-rename, old: /mnt/ram/leveldbtest-1000/LOG, new: /mnt/ram/leveldbtest-1000/LOG.old
-crfsopen, filename: /mnt/ram/leveldbtest-1000/LOG
-crfsopen, filename: /mnt/ram/leveldbtest-1000/LOG, fd: 4
-crfsopen, filename: /mnt/ram/leveldbtest-1000/LOCK
-crfsopen, filename: /mnt/ram/leveldbtest-1000/LOCK, fd: 6
-crfsopen, filename: /mnt/ram/leveldbtest-1000/MANIFEST-000001
-crfsopen, filename: /mnt/ram/leveldbtest-1000/MANIFEST-000001, fd: 8
-Close#:8
-Close#:8 done
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000001.dbtmp
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000001.dbtmp, fd: 10
-Close#:10
-Close#:10 done
-rename, old: /mnt/ram/leveldbtest-1000/000001.dbtmp, new: /mnt/ram/leveldbtest-1000/CURRENT
-crfsopen, filename: /mnt/ram/leveldbtest-1000/CURRENT
-crfsopen, filename: /mnt/ram/leveldbtest-1000/CURRENT, fd: 12
-Close#:12
-Close#:12 done
-crfsopen, filename: /mnt/ram/leveldbtest-1000/MANIFEST-000001
-crfsopen, filename: /mnt/ram/leveldbtest-1000/MANIFEST-000001, fd: 14
-Close#:14
-Close#:14 done
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000003.log
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000003.log, fd: 16
-crfsopen, filename: /mnt/ram/leveldbtest-1000/MANIFEST-000002
-crfsopen, filename: /mnt/ram/leveldbtest-1000/MANIFEST-000002, fd: 18
-crfsopen, filename: /mnt/ram/leveldbtest-1000
-crfsopen, filename: /mnt/ram/leveldbtest-1000, fd: 20
-Close#:20
-Close#:20 done
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000002.dbtmp
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000002.dbtmp, fd: 22
-Close#:22
-Close#:22 done
-rename, old: /mnt/ram/leveldbtest-1000/000002.dbtmp, new: /mnt/ram/leveldbtest-1000/CURRENT
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000004.log
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000004.log, fd: 25
-Close#:16
-Close#:16 done
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000005.ldb
-crfsopen, filename: /mnt/ram/leveldbtest-1000/000005.ldb, fd: 27
-
-                               Compactions
-Level  Files Size(MB) Time(sec) Read(MB) Write(MB)
---------------------------------------------------
-
-ycsb         :      11.380 micros/op;

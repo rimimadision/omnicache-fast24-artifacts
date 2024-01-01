@@ -2,36 +2,39 @@ import os
 import csv
 import re
 
+#/localhome/jian/CompoundFS-dev/AE-RESULTS-PERFOPT/leveldb/figure13/fusionfs/result.txt
+
 # Define the arrays
 thread_arr = [16, 32]
 #workload_arr = ["pvt_seq", "pvt_rand"]
-workload_arr = ["RunA", "RunB", "RunC", "RunD", "LoadE", "RunF"]
+workload_arr = ["ycsba", "ycsbb", "ycsbc", "ycsbd", "ycsbe", "ycsbf"]
 config_arr = ["fusionfs", "hostcache", "omnicache"]
 config_out_arr = ["FusionFS", "HostCache-user-level", "OmniCache"]
 readsize_arr = ["128"]
 
 # Base directory for output files
 output_dir = os.environ.get("AERESULTS", "")
-base_dir_template = f"{output_dir}/ycsb/{{config}}/{{workload}}/run1"
+base_dir_template = f"{output_dir}/ycsb/{{config}}/result.txt"
 
 # Output CSV file
 output_file = "RESULT.csv"
 
-# Function to extract the value before "MB/s" from a line and round to the nearest integer
-def extract_and_round_ops_per_sec(line):
-    pattern = re.compile(r'(\d+\.\d+)\sKops/s')
+def extract_and_round_ops_per_sec(line, operation_type):
+#    if operation_type == "fillrandom":
+#        pattern = re.compile(r'fillrandom\s+:\s+(\d+\.\d+)\s+micros/op;\s+(\d+\.\d+)\sMB/s')
+#    elif operation_type == "readrandom":
+#        pattern = re.compile(r'readrandom\s+:\s+(\d+\.\d+)\s+micros/op;\s+(\d+\.\d+)\sMB/s\s+\(.*\)')
+#    else:
+#        return None
 
-    match = pattern.search(line)
+    #pattern = re.compile(r'\d+\.\d+ MB/s')
+    match =  re.search(r'(\d+\.\d+)\sMB/s', line) 
 
     if match:
-        number_before_gb = float(match.group(1))
-        #  print(number_before_gb)
+        mbps = float(match.group(1))
+        return mbps 
     else:
-        print("No match found.")
-    #parts = line.split()
-    #ops_index = parts.index("GB/s")
-    #ops_sec_value = float(parts[ops_index - 1])
-    return number_before_gb
+        return None
 
 # Main function to iterate through workloads and extract MB/s
 def main():
@@ -52,15 +55,14 @@ def main():
             #for readsize in readsize_arr:
             for workload in workload_arr:
                 if workload != access_pattern:
-                    continue  # Skip if not the desired access pattern
+                  continue  # Skip if not the desired access pattern
 
                 #workload_data = [readsize]
-
 
                 workload_data = [workload]
                 for config in config_arr: 
 
-                    base_dir = base_dir_template.format(workload=workload, config=config)
+                    base_dir = base_dir_template.format(config=config)
 
                     #file_path = os.path.join(base_dir, f"result.txt")
                     file_path = base_dir
@@ -69,8 +71,9 @@ def main():
                             lines = file.readlines()
                             ops_sec_found = False
                             for line in lines:
-                                if "Kops/s" in line:
-                                    ops_sec_value = extract_and_round_ops_per_sec(line)
+                                if "MB/s" in line and workload in line:
+                                    #  print(line)
+                                    ops_sec_value = extract_and_round_ops_per_sec(line, workload)
                                     workload_data.append(ops_sec_value)
                                     ops_sec_found = True
                                     break
