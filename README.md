@@ -212,36 +212,22 @@ $ cd $BASE/appbench/leveldb/ae_scripts/
 $ ./make_db_bench.sh
 ```
 
-#### 3. Run LevelDB dbbench
+#### 3. Run YCSB
+
+```
+$ cd $BASE/appbench/leveldb/ae_scripts/figure12a
+$ ./figure12a.sh
+$ python3 results-extract.py
+$ cat RESULT.csv
+```
+
+#### 4. Run LevelDB dbbench
 
 ```
 $ cd $BASE/appbench/leveldb/ae_scripts/figure13
 $ ./figure13.sh
 $ python3 results-extract.py
-```
-
-### YCSB
-
-#### 1. Compile YCSB
-
-YCSB: Compiling YCSB requires installing JDK 8 as well as installing maven version 3. Please follow the steps below:
-
-```
-$ sudo add-apt-repository ppa:openjdk-r/ppa
-$ sudo apt update
-$ sudo apt install openjdk-8-jdk
-$ export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-$ export PATH=$PATH:$JAVA_HOME/bin
-Check installation using java -version
-$ sudo apt install maven
-```
-
-#### 2. Run YCSB
-```
-$ source scripts/setvars.sh
-$ cd $BASE/appbench/leveldb/ae_scripts/figure12a
-$ ./run_ycsb.sh
-$ python3 results-extract.py
+$ cat RESULT.csv
 ```
 
 ### Running with NOVA file system (Figure 4)
