@@ -230,39 +230,6 @@ $ python3 results-extract.py
 $ cat RESULT.csv
 ```
 
-### Running with NOVA file system (Figure 4)
-
-#### 1. Compile NOVA kenrel 
-
-First, we need to compile and install the kernel of NOVA and then reboot.
-
-NOTE:  If you are using our provided machine for AE, we have installed the NOVA kernel (version 5.1.0) for you. You don't need to reinstall the kernel. 
-
-```
-$ cd omnicache-fast24-artifacts
-$ source scripts/setvars.sh
-$ ./scripts/compile_kernel_nova.sh
-$ sudo reboot
-# Then select kernel 5.1.0 in grub during rebooting. Please be careful about what you select as incorrect options can lead to system unable to mount.
-
-```
-
-#### 2. Mount NOVA (After rebooting with kernel 5.1.0)
-
-```
-$ cd omnicache-fast24-artifacts
-$ source scripts/setvars.sh
-$ cd $BASE/libfs
-$ ./scripts/mountnova.sh
-```
-
-#### 3. Run NOVA with micro-benchmark (**Figure 4**):
-
-```
-$ cd $BASE/libfs/benchmark/ae_scripts/figure4
-$ ./figure4_nova.sh
-```
-
 # Known issues 
 1. The system may require occasional restarts because of a compatibility issue between our motherboard and Optane0, which makes Optane irresponsive. To reboot, we recommend using our hardware reboot emergency script instead of the traditional sudo reboot. To use our emergency script,
 ```
