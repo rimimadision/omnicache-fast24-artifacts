@@ -465,6 +465,101 @@ long vfio_devfs_macro_read_knn_write (struct crfss_fstruct *rd,
     char *p = (__force char __user *)buf;
     void* dis_buf = vmalloc(NUM_PREDICTING_CASES * NUM_TRAIN_CASES *sizeof(unsigned int));
 	void* data_buf = vmalloc(READ_BUF_SIZE);
+    unsigned long train_cases_width = NUM_TRAIN_CASES / READ_BUF_SIZE;
+    unsigned long data_idx = cmdrw->slba;
+    unsigned long prev_data_idx = cmdrw->slba;
+
+    if (copy_from_user(buf, (void __user *)cmdrw->common.prp2, cmdrw->nlb)) {
+		printk(KERN_ALERT "DEBUG: Failed %s:%d \n",__FUNCTION__,__LINE__);
+		return -EFAULT;
+	}
+
+#if 0
+    if (copy_from_user(dis_buf, (void __user *)cmdrw->blk_addr, NUM_PREDICTING_CASES * NUM_TRAIN_CASES *sizeof(unsigned int))) {
+		printk(KERN_ALERT "DEBUG: Failed %s:%d \n",__FUNCTION__,__LINE__);
+		return -EFAULT;
+	}
+#endif
+
+#if 0
+
+    for (i = 0; i < NUM_TRAIN_CASES; i += train_cases_width) {
+        read_knn_data(fd, i, train_cases_width);
+        calc_distance(dis_buf, predicting_cases, i, train_cases_width);
+    }
+    prediction(distance_arr);
+
+	for (i = 0; i < cmdrw->common.num_op; ++i) {
+		vec_opcode = cmdrw->common.opc_vec[i];
+
+		switch (vec_opcode) {
+			case nvme_cmd_read:
+				cmdrw_after->common.opc = nvme_cmd_read;
+
+				p = (__force char __user *)data_buf+ (cmdrw->param_vec[i].data_param.slba - cmdrw->slba) ;
+				cmdrw_after->common.prp2 = (uint64_t)p;
+
+				cmdrw_after->slba = cmdrw->param_vec[i].data_param.slba;
+				cmdrw_after->nlb = cmdrw->param_vec[i].data_param.nlb;
+
+				isappend = (cmdrw_after->slba == DEVFS_INVALID_SLBA) ? 1 : 0;
+
+				retval += vfio_crfss_io_read(rd, cmdrw_after, isappend);
+				break;
+			case nvme_cmd_read_cache:
+				cmdrw_after->blk_addr = cmdrw->common.prp_vec[i];
+				offset = cmdrw->param_vec[i].data_param.slba;
+				count = cmdrw->param_vec[i].data_param.nlb;
+				retval += cache_rw(rd, CACHE_READ_OP, cmdrw_after, cmdrw_after, data_buf+ (offset - cmdrw->slba), 
+						offset, offset + count - 1);
+
+				break;
+		}
+	}
+#endif
+
+    PredictingCase* predicting_cases = (PredictingCase*) buf;;
+    // unsigned int* distance_arr = vmalloc(NUM_PREDICTING_CASES * NUM_TRAIN_CASES *sizeof(unsigned int));
+    unsigned int* distance_arr =(unsigned int*) dis_buf;
+
+	cmdrw_after->common.opc = nvme_cmd_read;
+
+    data_idx = read_knn_data_buf(rd, data_buf, data_idx);
+
+    /* printk("calc_distance\n"); */
+    calc_distance(distance_arr, predicting_cases, prev_data_idx, data_idx - prev_data_idx);
+    //calc_distance(distance_arr, predicting_cases);
+
+    //printk("prediction\n");
+    /* prediction(distance_arr); */
+
+#if 1
+    if (copy_to_user((void __user *)cmdrw->common.prp2, dis_buf, cmdrw->nlb)) {
+		printk(KERN_ALERT "DEBUG: Failed %s:%d \n",__FUNCTION__,__LINE__);
+		return -EFAULT;
+	}
+#endif
+    /* printk("done\n"); */
+    vfree(distance_arr);
+	vfree(data_buf);
+    /* printk("return\n"); */
+
+    return data_idx;
+}
+
+long vfio_devfs_macro_read_knn_write_old (struct crfss_fstruct *rd,
+        nvme_cmdrw_t *cmdrw, nvme_cmdrw_t *cmdrw_after, char *buf) {
+
+
+	int vec_opcode;
+	int i = 0;
+    int isappend = 0;
+    unsigned long retval = 0;
+    unsigned long offset = 0;
+    unsigned long count = 0;
+    char *p = (__force char __user *)buf;
+    void* dis_buf = vmalloc(NUM_PREDICTING_CASES * NUM_TRAIN_CASES *sizeof(unsigned int));
+	void* data_buf = vmalloc(READ_BUF_SIZE);
     unsigned long data_idx = cmdrw->slba;
     unsigned long prev_data_idx = cmdrw->slba;
 

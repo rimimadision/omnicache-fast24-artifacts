@@ -1576,6 +1576,27 @@ size_t crfs_read(int fd, void *p, size_t count) {
 	return (size_t)retval;
 }
 
+size_t crfs_pread_from_cache(int fd, void *p, size_t count, off_t offset) {
+
+        int retval = 0;
+        int io_retval = 0;
+
+        ufile *fp = &ufile_table.open_files[fd];
+        if (!fp) {
+                printf("failed to get ufile %d\n", fd);
+                return -1;
+        }
+
+        if ((retval = do_cache_read(fp->inode, fp, offset, count, p,
+                    &fp->inode->cache_tree))) {
+                hit_counter++;
+        }
+        if (retval >= count) {
+                /* printf("pread, fd: %d, count: %ld, offset: %ld, fname: %s, ret: %d done\n",fd, count, offset, fp->fname, retval); */
+                return count;
+        }
+        return (size_t)retval;
+}
 size_t crfs_pread(int fd, void *p, size_t count, off_t offset) {
 
         int retval = 0;
@@ -2173,7 +2194,176 @@ size_t devfs_readchksmpwrite_cache_kernel(int fd, const void *p, size_t count, o
         return (size_t)retval;
 }
 
+size_t devfs_read_knn_write_hybrid(int fd, const void *p, size_t count, off_t offset) {
 
+        u64 slba = 0;
+        size_t write_cnt = 0, left = count;
+        int written = 0;
+        int retval;
+        struct macro_op_desc desc;
+        uint32_t crc = 0;
+        int j =0;
+        /* unsigned char result[NUM_TRAIN_CASES]; */
+        /* TrainCase train_cases[NUM_TRAIN_CASES]; */
+
+        //char buf[READ_BUF_SIZE];
+        int state = 0;
+        int data_idx = 0;
+        int feature_idx = 0;
+        int ten_exp_table[WEIGHT_SIZE];
+        char buf[READ_BUF_SIZE];
+        size_t cache_ret = 0;
+
+        ufile *fp = &ufile_table.open_files[fd];
+        if (!fp) {
+                printf("failed to get ufile %d\n", fd);
+                return -1;
+        }
+
+        unsigned long train_cases_width = NUM_TRAIN_CASES / READ_BUF_SIZE;
+
+        TrainCase* train_cases =(TrainCase*) malloc(NUM_TRAIN_CASES*sizeof(TrainCase));
+        PredictingCase* predicting_cases = (PredictingCase*) malloc(NUM_PREDICTING_CASES * sizeof(PredictingCase));;
+        unsigned int* distance_arr = malloc(NUM_PREDICTING_CASES * NUM_TRAIN_CASES *sizeof(unsigned int));
+        gen_predicting_data(predicting_cases);
+
+        for (unsigned long i = 0; i < NUM_TRAIN_CASES; i += train_cases_width) {
+
+            if (train_cases_width <= 0) break;
+            ten_exp_table[0] = 1;
+            for (j = 1; j < WEIGHT_SIZE; j++) {
+                ten_exp_table[i] = ten_exp_table[i - 1] * 10;
+            }
+
+            cache_ret = crfs_pread_from_cache(fd, buf, READ_BUF_SIZE, slba);
+
+            if (cache_ret < READ_BUF_SIZE) {
+                goto execute_in_kernel;
+            }
+
+            slba += READ_BUF_SIZE;
+            int k;
+            for (k = 0; k < READ_BUF_SIZE / BUS_WIDTH; k++) {
+                char *buf_ptr = buf + k * BUS_WIDTH;
+                if (state == 0) {
+                    // result
+                    if (data_idx + i < NUM_TRAIN_CASES)
+                        train_cases[data_idx + i].result =
+                            c2i(buf_ptr[BUS_WIDTH - 2]) * 10 + c2i(buf_ptr[BUS_WIDTH - 1]);
+                    state++;
+                } else {
+                    // feature
+                    for (j = 0; j < BUS_WIDTH / WEIGHT_SIZE; j++) {
+                        int buf_idx = j * WEIGHT_SIZE;
+                        unsigned char weight = 0;
+                        for (int q = 0; q < WEIGHT_SIZE; q++) {
+                            weight +=
+                                c2i(buf_ptr[buf_idx + q]) * ten_exp_table[WEIGHT_SIZE - 1 - q];
+                        }
+                        if (data_idx + i < NUM_TRAIN_CASES && feature_idx < FEATURE_DIM)
+                            train_cases[data_idx + i].feature_vec[feature_idx++] = weight;
+                    }
+                    if (state == FEATURE_DIM * WEIGHT_SIZE / BUS_WIDTH) {
+                        //assert(feature_idx == FEATURE_DIM);
+                        state = 0;
+                        feature_idx = 0;
+                        data_idx++;
+
+                    } else {
+                        state++;
+                    }
+                }
+            }
+            calc_distance(distance_arr, predicting_cases, i, train_cases_width, train_cases);
+            continue;
+execute_in_kernel:
+            retval = unvme_do_devfs_io_macro(g_dev, fd, fp->fd_queue.vsq,
+                    nvme_cmd_read_knn_write, (void *)predicting_cases, slba, (u64)NUM_PREDICTING_CASES * sizeof(PredictingCase), 0, NULL, NULL);
+
+        }
+
+        prediction(distance_arr, train_cases);
+
+        if (retval < 0) {
+                printf("devfs_checksumpwrite failed fd = %d, %d\n", fd, retval);
+                return -1;
+        }
+
+        free(distance_arr);
+        free(predicting_cases);
+        free (train_cases);
+ 
+
+        return retval;
+#if 0
+        unsigned int* distance_arr = malloc(NUM_PREDICTING_CASES * NUM_TRAIN_CASES *sizeof(unsigned int));
+
+        read_knn_data(fd);
+
+        gen_predicting_data(predicting_cases);
+
+        calc_distance(distance_arr, predicting_cases);
+
+        prediction(distance_arr);
+
+        if (retval < 0) {
+                printf("devfs_checksumpwrite failed fd = %d, %d\n", fd, retval);
+                return -1;
+        }
+
+        free(distance_arr);
+        free(predicting_cases);
+#endif
+/* #endif */
+}
+
+size_t devfs_read_knn_write(int fd, const void *p, size_t count, off_t offset) {
+#ifdef CACHE_HYBRID
+    return devfs_read_knn_write_hybrid(fd, p, count, offset);
+#endif
+        u64 slba = 0;
+        size_t write_cnt = 0, left = count;
+        int written = 0;
+        int retval;
+        struct macro_op_desc desc;
+	    uint32_t crc = 0;
+
+        ufile *fp = &ufile_table.open_files[fd];
+        if (!fp) {
+                printf("failed to get ufile %d\n", fd);
+                return -1;
+        }
+
+        unsigned long train_cases_width = NUM_TRAIN_CASES / READ_BUF_SIZE;
+
+        TrainCase* train_cases =(TrainCase*) malloc(NUM_TRAIN_CASES*sizeof(TrainCase));
+
+        PredictingCase* predicting_cases = (PredictingCase*) malloc(NUM_PREDICTING_CASES * sizeof(PredictingCase));
+        unsigned int* distance_arr = malloc(NUM_PREDICTING_CASES * NUM_TRAIN_CASES *sizeof(unsigned int));
+        gen_predicting_data(predicting_cases);
+
+        for (unsigned long i = 0; i < NUM_TRAIN_CASES; i += train_cases_width) {
+
+            read_knn_data(fd, i, train_cases_width, train_cases);
+
+            calc_distance(distance_arr, predicting_cases, i, train_cases_width, train_cases);
+            if (train_cases_width <= 0) break;
+        }
+
+        prediction(distance_arr, train_cases);
+
+        if (retval < 0) {
+                printf("devfs_checksumpwrite failed fd = %d, %d\n", fd, retval);
+                return -1;
+        }
+
+        free(distance_arr);
+        free(predicting_cases);
+        free(train_cases);
+        return (size_t)retval;
+}
+
+#if 0
 size_t devfs_read_knn_write_hybrid(int fd, const void *p, size_t count, off_t offset) {
 
         u64 slba = 0;
@@ -2303,6 +2493,7 @@ size_t devfs_read_knn_write(int fd, const void *p, size_t count, off_t offset) {
 #endif
 }
 
+#endif
 #if 0
 size_t devfs_readchksmpwrite_cache_hybrid_model(int fd, const void *p, size_t count, off_t offset, uint8_t crc_pos) {
 

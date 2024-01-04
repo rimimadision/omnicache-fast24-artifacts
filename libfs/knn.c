@@ -1,15 +1,15 @@
 #include "knn.h"
 
-#define c2i(c) (c - '0')
+//#define c2i(c) (c - '0')
 #define max(a, b) ((a) > (b) ? (a) : (b))
 
-unsigned char result[NUM_TRAIN_CASES];
-TrainCase train_cases[NUM_TRAIN_CASES];
+/* unsigned char result[NUM_TRAIN_CASES]; */
+/* TrainCase train_cases[NUM_TRAIN_CASES]; */
 
 //PredictingCase predicting_cases[NUM_PREDICTING_CASES];
 
 //unsigned int distance_arr[NUM_PREDICTING_CASES][NUM_TRAIN_CASES];
-unsigned long read_knn_data_buf(int fd, char* buf, unsigned long start_train_idx) {
+unsigned long read_knn_data_buf(int fd, char* buf, unsigned long start_train_idx, TrainCase* train_cases) {
 
     //char buf[READ_BUF_SIZE];
     int state = 0;
@@ -68,7 +68,7 @@ unsigned long read_knn_data_buf(int fd, char* buf, unsigned long start_train_idx
     //assert(data_idx == NUM_TRAIN_CASES);
 }
 
-void read_knn_data(int fd, unsigned long start_train_idx, unsigned long count) {
+void read_knn_data(int fd, unsigned long start_train_idx, unsigned long count, TrainCase* train_cases) {
 
     char buf[READ_BUF_SIZE];
     int state = 0;
@@ -90,7 +90,7 @@ void read_knn_data(int fd, unsigned long start_train_idx, unsigned long count) {
 
         while (read_len != READ_BUF_SIZE &&
                 (tmp_len = crfsread(fd, buf, READ_BUF_SIZE - read_len))) {
-            printf("crfs read, tmp_len: %ld\n", tmp_len);
+            /* printf("crfs read, tmp_len: %ld\n", tmp_len); */
             read_len += tmp_len;
         }
         if (!tmp_len) {
@@ -132,7 +132,7 @@ void read_knn_data(int fd, unsigned long start_train_idx, unsigned long count) {
 
 int sqr(int x) { return x * x;  }
 
-void calc_distance(unsigned int* distance_arr, PredictingCase* predicting_cases, unsigned long start_train_idx, unsigned long count) {
+void calc_distance(unsigned int* distance_arr, PredictingCase* predicting_cases, unsigned long start_train_idx, unsigned long count, TrainCase* train_cases) {
     int i, j, k;
     for (k = 0; k < FEATURE_DIM; k++) {
         //for (i = 0; i < NUM_TRAIN_CASES; i++) {
@@ -154,7 +154,7 @@ void gen_predicting_data(PredictingCase* predicting_cases) {
   }
 }
 
-void prediction(unsigned int* distance_arr) {
+void prediction(unsigned int* distance_arr, TrainCase* train_cases) {
   int i, j;
     DisPair max_heap[PARAM_K];
     unsigned int* freq_map = malloc(NUM_TRAIN_CASES*sizeof(unsigned int));
@@ -217,7 +217,7 @@ void prediction(unsigned int* distance_arr) {
         prediction_result = j;
       }
     }
-	printf("result = %d for i = %d\n", prediction_result, i); 
+	/* printf("finish prediction for i = %d\n", i);  */
   }
    free(freq_map);
 }

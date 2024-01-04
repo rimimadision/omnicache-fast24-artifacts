@@ -534,7 +534,7 @@ long vfio_crfss_io_read (struct crfss_fstruct *rd, nvme_cmdrw_t *cmdreq,
 
 #if  1
         if (isappend && fpos >= fp->f_inode->i_size) {
-            printk("return cread, offset: %ld, count: %ld, fsize: %ld\n", fpos, reqsz, fp->f_inode->i_size);
+            /* printk("return cread, offset: %ld, count: %ld, fsize: %ld\n", fpos, reqsz, fp->f_inode->i_size); */
             return 0;
         }
 #endif

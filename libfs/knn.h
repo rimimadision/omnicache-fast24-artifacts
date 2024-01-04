@@ -13,6 +13,8 @@
 #include "knn_const.h"
 #include "crfslib.h"
 
+#define c2i(c) (c - '0')
+
 typedef struct {
 	unsigned char result;
 	unsigned char feature_vec[FEATURE_DIM];
@@ -27,15 +29,15 @@ typedef struct {
 	unsigned char result;
 } DisPair;
 
-unsigned long read_knn_data_buf(int fd, char* buf, unsigned long start_train_idx);
+unsigned long read_knn_data_buf(int fd, char* buf, unsigned long start_train_idx, TrainCase* train_cases);
 
-void read_knn_data(int fd, unsigned long start_train_idx, unsigned long count);
+void read_knn_data(int fd, unsigned long start_train_idx, unsigned long count, TrainCase* train_cases);
 
 void gen_predicting_data(PredictingCase* predicting_cases);
 
 void calc_distance(unsigned int* distance_arr, PredictingCase* predicting_cases, 
-        unsigned long start_train_idx, unsigned long count);
+        unsigned long start_train_idx, unsigned long count,  TrainCase* train_cases);
 
-void prediction(unsigned int* distance_arr);
+void prediction(unsigned int* distance_arr,  TrainCase* train_cases);
 #endif
 

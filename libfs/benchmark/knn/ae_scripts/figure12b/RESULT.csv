@@ -1,0 +1,6 @@
+-----------------------
+Table for knn
+-----------------------
+Threads,FusionFS,HostCache-user-level,OmniCache
+8,1.12,1.23,7.23
+16,1.88,2.04,8.29
