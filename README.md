@@ -212,7 +212,7 @@ $ cd $BASE/appbench/leveldb/ae_scripts/
 $ ./make_db_bench.sh
 ```
 
-#### 3. Run YCSB
+#### 3. Run YCSB (**Figure 12a**)
 
 ```
 $ cd $BASE/appbench/leveldb/ae_scripts/figure12a
@@ -221,11 +221,23 @@ $ python3 results-extract.py
 $ cat RESULT.csv
 ```
 
-#### 4. Run LevelDB dbbench
+#### 4. Run LevelDB dbbench (**Figure 13**)
 
 ```
 $ cd $BASE/appbench/leveldb/ae_scripts/figure13
 $ ./figure13.sh
+$ python3 results-extract.py
+$ cat RESULT.csv
+```
+
+### Run KNN  (**Figure 12b**)
+
+```
+$ cd $BASE/libfs/benchmark/knn/
+$ mkdir build
+$ make
+$ cd $BASE/libfs/benchmark/knn/ae_scripts/figure12b
+$ ./figure12b.sh
 $ python3 results-extract.py
 $ cat RESULT.csv
 ```
