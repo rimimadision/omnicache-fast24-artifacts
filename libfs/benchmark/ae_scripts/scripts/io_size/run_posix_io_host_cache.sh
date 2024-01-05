@@ -43,7 +43,7 @@ RUN() {
 }
 
 # 0. Random read; 1. Random write
-declare -a typearr=("1")
+declare -a typearr=("0" "1")
 declare -a threadarr=("1024" "2048" "3072" "4096")
 for size in "${typearr[@]}"
 do
