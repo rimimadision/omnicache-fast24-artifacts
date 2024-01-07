@@ -242,6 +242,16 @@ $ python3 results-extract.py
 $ cat RESULT.csv
 ```
 
+### Validate PM Bandwidth
+
+```
+$ cd $BASE/libfs
+$ ./scripts/mountdax.sh
+$ cd $BASE/libfs/benchmark/ae_scripts/validate-pm/
+$ ./figure4_pm.sh
+$ python3 results-extract-rand.py
+$ cat RESULT.csv
+```
 # Known issues 
 1. The system may require occasional restarts because of a compatibility issue between our motherboard and Optane0, which makes Optane irresponsive. To reboot, we recommend using our hardware reboot emergency script instead of the traditional sudo reboot. To use our emergency script,
 ```
