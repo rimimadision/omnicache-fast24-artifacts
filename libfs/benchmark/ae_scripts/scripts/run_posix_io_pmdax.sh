@@ -10,8 +10,8 @@ FILESIZE=(32*1024) #MB
 #RESULTDIR=$RESULTS/microbench/posix_io_smartcache_cxl
 
 # 1. Random read; 2. Random write
-declare -a workloadarr=("randread" "randwrite" "seqread" "seqwrite")
-declare -a workloadidarr=("0" "1" "2" "3")
+declare -a workloadarr=("randread" "randwrite")
+declare -a workloadidarr=("0" "1")
 declare -a threadarr=("1" "4" "16" "32")
 
 # Create output directories
@@ -41,7 +41,7 @@ RUN() {
                 mkdir -p $output
         fi
 
-        $MICROBENCH/build/test_direct_posix_fs $2 1024 $1 $3 $1 &> $output/result.txt 
+        $MICROBENCH/build/test_direct_posix_fs $2 4096 $1 $3 $1 &> $output/result.txt 
 
         sleep 2
 }
