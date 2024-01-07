@@ -242,41 +242,6 @@ $ python3 results-extract.py
 $ cat RESULT.csv
 ```
 
-### Running with NOVA file system (Figure 4)
-
-#### 1. Compile NOVA kenrel 
-
-First, we need to compile and install kernel of NOVA and then reboot.
-
-**NOTE: For NOVA evaluation, please use optane1; due to some unknown hardware/system reasons, we could not mount NOVA on the optane0 machine, but it can work well with optane1. So, please use optane1 to evaluate NOVA. If you are using our provided machine for AE, we have installed the NOVA kernel (version 5.1.0) for you. You don't need to reinstall the kernel.**
-
-```
-$ cd omnicache-fast24-artifacts
-$ source scripts/setvars.sh
-$ ./scripts/compile_kernel_nova.sh
-$ sudo reboot
-# Then select kernel 5.1.0 in grub during rebooting
-
-```
-
-#### 2. Mount NOVA (After rebooting with kernel 5.1.0)
-
-```
-$ cd omnicache-fast24-artifacts
-$ source scripts/setvars.sh
-$ cd $BASE/libfs
-$ ./scripts/mountnova.sh
-```
-
-#### 3. Run NOVA with microbench (**Figure 4**):
-
-```
-$ cd $BASE/libfs/benchmark/ae_scripts/figure4
-$ ./figure4_nova.sh
-$ python3 results-extract-nova.py
-$ cat RESULT-nova.csv
-```
-
 ### Validate PM Bandwidth
 
 ```
