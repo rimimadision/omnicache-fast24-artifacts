@@ -42,7 +42,7 @@ RUN() {
 }
 
 declare -a typearr=("0")
-declare -a threadarr=("8" "16")
+declare -a threadarr=("16" "32")
 #declare -a threadarr=("4")
 for size in "${typearr[@]}"
 do

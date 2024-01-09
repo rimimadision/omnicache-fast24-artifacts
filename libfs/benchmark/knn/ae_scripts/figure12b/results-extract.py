@@ -3,7 +3,7 @@ import csv
 import re
 
 # Define the arrays
-thread_arr = [8, 16]
+thread_arr = [16, 32]
 #workload_arr = ["pvt_seq", "pvt_rand"]
 workload_arr = ["knn"]
 config_arr = ["fusionfs", "hostcache", "omnicache"]

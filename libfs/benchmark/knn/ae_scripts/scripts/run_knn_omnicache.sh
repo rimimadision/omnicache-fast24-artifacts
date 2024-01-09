@@ -37,7 +37,7 @@ RUN() {
 
 
     export HOST_CACHE_LIMIT_ENV=$((16*1024*1024*1024))
-    export DEV_CACHE_LIMIT_ENV=$((16*1024*1024*1024))
+    export DEV_CACHE_LIMIT_ENV=$((4*1024*1024*1024))
     #numactl --physcpubind=0-15,32-47 --membind=0 
     $MICROBENCH/knn//build/knn_hybrid $1  | tee $output/result.txt
     unset HOST_CACHE_LIMIT_ENV
@@ -46,7 +46,7 @@ RUN() {
 }
 
 declare -a typearr=("0")
-declare -a threadarr=("8" "16")
+declare -a threadarr=("16" "32")
 #declare -a threadarr=("4")
 for size in "${typearr[@]}"
 do

@@ -43,7 +43,7 @@ RUN() {
 
 # 1. Random read; 2. Random write
 declare -a typearr=("0")
-declare -a threadarr=("8" "16")
+declare -a threadarr=("16" "32")
 for size in "${typearr[@]}"
 do
     for thrd in "${threadarr[@]}"
