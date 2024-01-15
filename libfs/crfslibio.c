@@ -1106,7 +1106,7 @@ int set_affinity() {
 	assert(thread);
 	/* Set affinity mask*/
 	CPU_ZERO(&cpuset);
-	for (j = 16; j < 30; j++) 
+	for (j = 0; j < 16; j++) 
 		CPU_SET(j, &cpuset);
 	s = pthread_setaffinity_np(thread, sizeof(cpu_set_t), &cpuset);
 	if (s != 0) { 
@@ -1142,9 +1142,9 @@ void* run_dev_thread(void* arg) {
         };
 
 	//set_realtime_priority();
-//#ifdef CACHE_HYBRID
-//	set_affinity();
-//#endif
+#ifdef CXL_MEM
+        set_affinity();
+#endif
 
 #ifdef REDUCE_CPU_FREQ
 	set_affinity();

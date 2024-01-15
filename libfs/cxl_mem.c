@@ -62,6 +62,7 @@ void* cxl_mem_init(int dev, unsigned int num_pages, unsigned int cxl_ns_size) {
 	memset(cxl_mempool.bitmap, 0, CXL_MEM_PG_NUM*sizeof(int));
 	cxl_mempool.head = 0;
 	crfs_mutex_init(&cxl_mempool.lock);
+	/* crfs_spin_init(&cxl_mempool.spinlock, 0); */
 
 #ifdef CXL_MEM_NAMESPACE
     printf("allocate namespace, size: %d\n", cxl_ns_size);
@@ -123,11 +124,13 @@ void* cxl_malloc(unsigned int num_pages, struct cxl_mem_namespace *cxl_ns) {
 	crfs_mutex_unlock(&cxl_mempool.lock);
 #else
         crfs_mutex_lock(&cxl_mempool.lock);
+        /* crfs_spin_lock(&cxl_mempool.spinlock); */
     while (cxl_mempool.bitmap[cxl_mempool.head] != 0)
         cxl_mempool.head = (cxl_mempool.head + 1) & (CXL_MEM_PG_NUM - 1);
     cxl_mempool.bitmap[cxl_mempool.head] = 1;
     bufAddr = cxl_mempool.mem + cxl_mempool.head * CXL_MEM_PG_SIZE;
     cxl_mempool.head = (cxl_mempool.head + 1) & (CXL_MEM_PG_NUM- 1);
+        /* crfs_spin_unlock(&cxl_mempool.spinlock); */
         crfs_mutex_unlock(&cxl_mempool.lock);
 #endif
 

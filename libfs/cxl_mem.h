@@ -9,6 +9,7 @@ struct cxl_mem {
 	int bitmap[CXL_MEM_PG_NUM];
 	int head;
 	crfs_mutex_t lock;
+	crfs_spinlock_t spinlock;
 };
 
 struct cxl_mem_namespace {

@@ -1340,6 +1340,16 @@ void evict_interval_nodes() {
                 inode = evict_tree_node->fp->inode;
                 /* printf("evict tree node, node: %p start: %ld, end: %ld, cache_tree: %p\n", evict_tree_node, evict_tree_node->it.start, evict_tree_node->it.last, &evict_tree_node->fp->inode->cache_tree); */
 
+#ifdef CXL_MEM
+                if (evict_tree_node!= NULL && evict_tree_node->cache_in_kernel) {
+                        crfs_mutex_lock(&evict_tree_node->lock);
+                        do_evict_cxl_in_kernel(evict_tree_node->fp, evict_tree_node);
+                        cxl_free(evict_tree_node->cxl_blk_addr);
+                        __sync_sub_and_fetch(&cache_size, NODE_SIZE_LIMIT);
+                        __sync_sub_and_fetch(&dev_cache_size, NODE_SIZE_LIMIT);
+                        crfs_mutex_unlock(&evict_tree_node->lock);
+                }
+#else
                 crfs_rwlock_wrlock(&inode->cache_tree_lock);
                 flush_tree_node_batch(evict_tree_node->fp, evict_tree_node);
                 /* interval_tree_remove(&evict_tree_node->it, &inode->cache_tree); */
@@ -1350,6 +1360,7 @@ void evict_interval_nodes() {
                 /* printf("cachesize: %ld\n", cache_size); */
 
                 crfs_rwlock_unlock(&inode->cache_tree_lock);
+#endif
         /* } */
 }
 
